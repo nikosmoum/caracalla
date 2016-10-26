@@ -1,0 +1,1757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.9" jmeter="3.0 r1743807">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Main Elements" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Configuration" enabled="true"/>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Test Config" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="TEST.NUM_USERS" elementType="Argument">
+              <stringProp name="Argument.name">TEST.NUM_USERS</stringProp>
+              <stringProp name="Argument.value">${__P(NUM_USERS,29)}</stringProp>
+              <stringProp name="Argument.desc">The number of simultaneous users.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="TEST.RAMP_UP" elementType="Argument">
+              <stringProp name="Argument.name">TEST.RAMP_UP</stringProp>
+              <stringProp name="Argument.value">${__P(RAMP_UP,${__P(NUM_USERS,45)})}</stringProp>
+              <stringProp name="Argument.desc">The time, in seconds, to ramp up from 1 user to TEST.NUM_USERS.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="TEST.DURATION_SECONDS" elementType="Argument">
+              <stringProp name="Argument.name">TEST.DURATION_SECONDS</stringProp>
+              <stringProp name="Argument.value">${__P(DURATION_SECONDS,600)}</stringProp>
+              <stringProp name="Argument.desc">How long the test should run, in seconds.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="TEST.SAMPLES_PER_MINUTE" elementType="Argument">
+              <stringProp name="Argument.name">TEST.SAMPLES_PER_MINUTE</stringProp>
+              <stringProp name="Argument.value">${__P(SAMPLES_PER_MINUTE,180)}</stringProp>
+              <stringProp name="Argument.desc">The throughput to run the tests at. 180/minute means JMeter will attemp a call every 1/3 of a second. Make sure there are enough threads available.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="TEST.PRODUCTNAME" elementType="Argument">
+              <stringProp name="Argument.name">TEST.PRODUCTNAME</stringProp>
+              <stringProp name="Argument.value">${__P(PRODUCTNAME,EXAMPLESKU)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">The product to bind</stringProp>
+            </elementProp>
+          </collectionProp>
+          <stringProp name="TestPlan.comments">Changing these variables can alter how much stress will be performed on the target.</stringProp>
+        </Arguments>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Throughput Config" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_RELEASE" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_RELEASE</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_RELEASE,20.370065)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/release</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_STATUS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_STATUS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_STATUS,21.496294)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET status</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID,16.026716)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_SERIALS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_SERIALS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_SERIALS,15.937387)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/certificates/serials</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_CONTENT_OVERRIDES" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_CONTENT_OVERRIDES</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_CONTENT_OVERRIDES,10.827482)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/content_overrides</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_COMPLIANCE" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_COMPLIANCE</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_COMPLIANCE,6.633626)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/compliance</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_OWNER" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_OWNER</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_OWNER,2.614400)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/owner</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.PUT_CONSUMERS_UUID" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.PUT_CONSUMERS_UUID</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.PUT_CONSUMERS_UUID,1.823028)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">PUT consumers/{consumeruuid}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.POST_HYPERVISORS_OWNER_OWNERKEY" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.POST_HYPERVISORS_OWNER_OWNERKEY</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_HYPERVISORS_OWNER_OWNERKEY,2.184934)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">POST hypervisors?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS,0.589896)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/consumers</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS_PARAMS,0.431545)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/entitlements?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_PARAMS,0.378541)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">POST consumers/{consumeruuid}/entitlements?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_POOLS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_POOLS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_POOLS,0.000014)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/pools</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_INFO" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_INFO</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_INFO,0.100854)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/info</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS_PARAMS,0.080109)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/consumers?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_PARAMS,0.096536)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/certificates?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.PUT_OWNERS_OWNERKEY_SUBSCRIPTIONS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.PUT_OWNERS_OWNERKEY_SUBSCRIPTIONS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.PUT_OWNERS_OWNERKEY_SUBSCRIPTIONS_PARAMS,0.045974)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">PUT owners/{ownerkey}/subscriptions?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.PUT_CONSUMERS_UUID_CONTENT_OVERRIDES" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.PUT_CONSUMERS_UUID_CONTENT_OVERRIDES</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.PUT_CONSUMERS_UUID_CONTENT_OVERRIDES,0.047067)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">PUT consumers/{consumeruuid}/content_overrides</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_JOBS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_JOBS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_JOBS_PARAMS,0.040240)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET jobs?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.POST_CONSUMERS_OWNER_OWNERKEY" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.POST_CONSUMERS_OWNER_OWNERKEY</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_OWNER_OWNERKEY,0.051926)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">POST consumers?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_ACTIVATION_KEYS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_ACTIVATION_KEYS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_ACTIVATION_KEYS_PARAMS,0.033538)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/activation_keys?{params}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_USERS_USER_OWNERS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_USERS_USER_OWNERS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_USERS_USER_OWNERS,0.055006)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET users/{user}/owners</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.DELETE_CONSUMERS_UUID" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.DELETE_CONSUMERS_UUID</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.DELETE_CONSUMERS_UUID,0.047198)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">DELETE consumers/{consumeruuid}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS,0.03)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">POST consumers/{consumeruuid}/entitlements</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK,20.041446)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">POST consumers/{consumeruuid}/entitlements</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS,0.022815)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET consumers/{consumeruuid}/entitlements</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY_SUBSCRIPTIONS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY_SUBSCRIPTIONS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY_SUBSCRIPTIONS,0.006593)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}/subscriptions</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_OWNERS_OWNERKEY" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_OWNERS_OWNERKEY</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_OWNERS_OWNERKEY,0.016413)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET owners/{ownerkey}</stringProp>
+            </elementProp>
+            <elementProp name="THROUGHPUT.GET_POOLS_PARAMS" elementType="Argument">
+              <stringProp name="Argument.name">THROUGHPUT.GET_POOLS_PARAMS</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_POOLS_PARAMS,0.000359)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">GET pools?{params}</stringProp>
+            </elementProp>
+          </collectionProp>
+          <stringProp name="TestPlan.comments">Each variable represents the chance (as a percentage) of a call running in a loop, per thread. This should add up to 100%, or at least close to it.
+
+The Description is used by automation tools in order to map each test call to the sampled traffic CSV that is generated by the &quot;Candlepin Traffic Profile by Call Type&quot; report in Splunk.
+Visit https://splunk.corp.redhat.com/en-US/app/search/candlepin_traffic_profile to see the latest version.</stringProp>
+        </Arguments>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Environment Config" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="ENV.PROTOCOL" elementType="Argument">
+              <stringProp name="Argument.name">ENV.PROTOCOL</stringProp>
+              <stringProp name="Argument.value">${__P(PROTOCOL,https)}</stringProp>
+              <stringProp name="Argument.desc">Choose between http and https (there can be others, but commonly those are the two that matter).</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.DOMAIN" elementType="Argument">
+              <stringProp name="Argument.name">ENV.DOMAIN</stringProp>
+              <stringProp name="Argument.value">${__P(DOMAIN,localhost)}</stringProp>
+              <stringProp name="Argument.desc">The IP address or domain name of the target server.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.PORT" elementType="Argument">
+              <stringProp name="Argument.name">ENV.PORT</stringProp>
+              <stringProp name="Argument.value">${__P(PORT,8443)}</stringProp>
+              <stringProp name="Argument.desc">Connect to the target server on this port. Common values are 443 or 8080. Leave blank to specify no port.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.PATH" elementType="Argument">
+              <stringProp name="Argument.name">ENV.PATH</stringProp>
+              <stringProp name="Argument.value">${__P(PATH,/candlepin)}</stringProp>
+              <stringProp name="Argument.desc">The part of the URL that starts the path. For Dist F5 and individual nodes, use /candlepin. For external F5, use /subscription instead.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.TIMEOUT_CONNECT_MILLIS" elementType="Argument">
+              <stringProp name="Argument.name">ENV.TIMEOUT_CONNECT_MILLIS</stringProp>
+              <stringProp name="Argument.value">${__P(TIMEOUT_CONNECT_MILLIS,60000000000)}</stringProp>
+              <stringProp name="Argument.desc">The number of milliseconds to wait for a connection to the target server after initiating an http request.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.TIMEOUT_RESPONSE_MILLIS" elementType="Argument">
+              <stringProp name="Argument.name">ENV.TIMEOUT_RESPONSE_MILLIS</stringProp>
+              <stringProp name="Argument.value">${__P(TIMEOUT_RESPONSE_MILLIS,12000000000000)}</stringProp>
+              <stringProp name="Argument.desc">The number of milliseconds to wait for a response from the target server after sending a request.</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.USERNAME" elementType="Argument">
+              <stringProp name="Argument.name">ENV.USERNAME</stringProp>
+              <stringProp name="Argument.value">${__P(USERNAME,admin)}</stringProp>
+              <stringProp name="Argument.desc">The username to use for the target service</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ENV.PASSWORD" elementType="Argument">
+              <stringProp name="Argument.name">ENV.PASSWORD</stringProp>
+              <stringProp name="Argument.value">${__P(PASSWORD,admin)}</stringProp>
+              <stringProp name="Argument.desc">The password to use for the target service</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+          <stringProp name="TestPlan.comments">Changing these variables changes the target of the tests (i.e. changes CI, FTE, QA, STAGE, etc.)</stringProp>
+        </Arguments>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="File Config" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="FILE.INPUT_DATA_DIR" elementType="Argument">
+              <stringProp name="Argument.name">FILE.INPUT_DATA_DIR</stringProp>
+              <stringProp name="Argument.value">${__P(INPUT_DATA_DIR,./input_data_files)}</stringProp>
+              <stringProp name="Argument.desc">Directory that contains all of the test data files</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+          <stringProp name="TestPlan.comments">Changing these variables changes where files get read/written.</stringProp>
+        </Arguments>
+        <hashTree/>
+      </hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${ENV.DOMAIN}</stringProp>
+        <stringProp name="HTTPSampler.port">${ENV.PORT}</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout">${ENV.TIMEOUT_CONNECT_MILLIS}</stringProp>
+        <stringProp name="HTTPSampler.response_timeout">${ENV.TIMEOUT_RESPONSE_MILLIS}</stringProp>
+        <stringProp name="HTTPSampler.protocol">${ENV.PROTOCOL}</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+        <boolProp name="HTTPSampler.image_parser">true</boolProp>
+        <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+        <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="false">
+        <collectionProp name="AuthManager.auth_list">
+          <elementProp name="" elementType="Authorization">
+            <stringProp name="Authorization.url">${ENV.PROTOCOL}://${ENV.DOMAIN}</stringProp>
+            <stringProp name="Authorization.username">${ENV.USERNAME}</stringProp>
+            <stringProp name="Authorization.password">${ENV.PASSWORD}</stringProp>
+            <stringProp name="Authorization.domain"></stringProp>
+            <stringProp name="Authorization.realm"></stringProp>
+          </elementProp>
+        </collectionProp>
+      </AuthManager>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Authorization</stringProp>
+            <stringProp name="Header.value">Basic YWRtaW46YWRtaW4=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+        <stringProp name="CookieManager.policy">default</stringProp>
+        <stringProp name="CookieManager.implementation">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>
+      </CookieManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="cp-throughput" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${TEST.NUM_USERS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${TEST.RAMP_UP}</stringProp>
+        <longProp name="ThreadGroup.start_time">34326122000</longProp>
+        <longProp name="ThreadGroup.end_time">34326122000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${TEST.DURATION_SECONDS}</stringProp>
+        <stringProp name="ThreadGroup.delay">1</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <stringProp name="TestPlan.comments">SMALL = 180 samples/min (3 samples/sec)
+MEDIUM = 900 samples/min (15 samples/sec)
+LARGE = 6900 samples/min (115 samples/sec)</stringProp>
+          <intProp name="calcMode">3</intProp>
+          <stringProp name="throughput">${TEST.SAMPLES_PER_MINUTE}</stringProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/release" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_RELEASE}</stringProp>
+          <stringProp name="TestPlan.comments">get_consumer_release-weighted</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/release" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/release</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">get_consumer_release</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET status" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_STATUS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET status" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/status</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID}</stringProp>
+          <stringProp name="TestPlan.comments">consumers_uuid-weighted</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}?jltest=true</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">consumers_uuid</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates/serials" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_SERIALS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid_certs_ser.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/certificates/serials" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/certificates/serials</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">consumers_uuid_certs_ser</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/content_overrides" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_CONTENT_OVERRIDES}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/content_overrides" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/content_overrides</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/compliance" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_COMPLIANCE}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/compliance" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/compliance</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/owner" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_OWNER}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/owner" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/owner</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT consumers/{uuid}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.PUT_CONSUMERS_UUID}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT consumers/{uuid}" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;lastCheckin&quot;:&quot;${__time(yyyy-MM-dd&apos;T&apos;hh:mm:ss.000+0000)}&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}</stringProp>
+            <stringProp name="HTTPSampler.method">PUT</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST hypervisors?owner={ownerkey}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.POST_HYPERVISORS_OWNER_OWNERKEY}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/hypervisors.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="virt-who report generator" enabled="true">
+            <stringProp name="TestPlan.comments">In order to properly load Candlepin, we can&apos;t use a static amount of guests each time through. They need to occassionally change. This will generate a virt-who report with a random number of guests between guestMin and guestMax, inclusive.</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">String owner = vars.get(&quot;ownerkey&quot;);
+long numVirtHosts = Long.parseLong(vars.get(&quot;numVirtHosts&quot;));
+long numVirtGuests = Long.parseLong(vars.get(&quot;numVirtGuests&quot;));
+
+StringBuilder sb = new StringBuilder();
+sb.append(&quot;{&quot;);
+long remainingVirtGuests = numVirtGuests;
+for (long virtHost = 0; virtHost &lt; numVirtHosts; ++virtHost) {
+    String hypervisorName = owner + &quot;-host&quot; + virtHost;
+    sb.append(&quot;\&quot;&quot;).append(hypervisorName).append(&quot;\&quot;: [&quot;);
+
+    // Calculate guests per host each time (rather than truncate)
+    long numVirtGuestsForHost = remainingVirtGuests / (numVirtHosts - virtHost);
+
+    for (long virtGuest = 0; virtGuest &lt; numVirtGuestsForHost; ++virtGuest) {
+        sb.append(&quot;\&quot;&quot;)
+                .append(hypervisorName)
+                .append(&quot;-guest&quot;)
+                .append(virtGuest)
+                .append(&quot;-&quot;)
+                .append(System.currentTimeMillis() % 100) // Introduce a little variance so that there is *some* change between runs
+                .append(&quot;\&quot;,&quot;);
+    }
+    if (numVirtGuestsForHost &gt; 0) {
+        // Remove the comma (if there was a comma)
+        sb.setLength(sb.length() - 1);
+    }
+    sb.append(&quot;],&quot;);
+    remainingVirtGuests -= numVirtGuestsForHost;
+}
+if (numVirtHosts &gt; 0) {
+    // Remove the comma (if there was a comma)
+    sb.setLength(sb.length() - 1);
+}
+sb.append(&quot;}&quot;);
+String report = sb.toString();
+vars.put(&quot;report&quot;, report);
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST hypervisors?owner={ownerkey}" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${report}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/hypervisors?owner=${ownerkey}&amp;env=Library</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/get_owners_ownerkey_consumers.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET owners/{ownerkey}/consumers" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}/consumers</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/entitlements?{params}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS_PARAMS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/entitlements?{params}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="exclude" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">certificates.key</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">exclude</stringProp>
+                </elementProp>
+                <elementProp name="exclude" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">certificates.cert</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">exclude</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements?{params}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_PARAMS}</stringProp>
+          <stringProp name="TestPlan.comments">bind_to_pool
+
+Note that this will first create a consumer (with an installed product), then bind to it, then delete the consumer. This is done so that we don&apos;t run out of available subscriptions.</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">vars.put(&quot;consumername&quot;,&quot;test.consumer.&quot; + (int) (Math.random() * 10000));</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers?owner={ownerkey} (pre-bind)" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;name&quot;:&quot;${consumername}&quot;,&#xd;
+  &quot;entitlementCount&quot;:0,&#xd;
+  &quot;facts&quot;:{&#xd;
+    &quot;network.hostname&quot;:&quot;${consumername}&quot;,&#xd;
+    &quot;uname.machine&quot;:&quot;x86_64&quot;,&#xd;
+    &quot;cpu.cpu_socket(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
+    &quot;distributor_version&quot;:null,&#xd;
+    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+  },&#xd;
+  &quot;lastCheckin&quot;:null,&#xd;
+  &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
+  &quot;serviceLevel&quot;:&quot;&quot;,&#xd;
+  &quot;environment&quot;:null,&#xd;
+  &quot;entitlementStatus&quot;:&quot;valid&quot;,&#xd;
+  &quot;installedProducts&quot;:[{&#xd;
+    &quot;productId&quot;:&quot;69&quot;,&#xd;
+    &quot;productName&quot;:&quot;Red Hat Enterprise Linux Server&quot;,&#xd;
+    &quot;version&quot;:&quot;7.0&quot;,&#xd;
+    &quot;arch&quot;:&quot;x86_64&quot;&#xd;
+  }],&#xd;
+  &quot;username&quot;:&quot;${username}&quot;,&#xd;
+  &quot;autoheal&quot;:true,&#xd;
+  &quot;guestIds&quot;:[]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">create_consumers
+This will create a consumer WITH an installed product. This is unlike how subscription manager does it: It first creates the consumer, then makes another call with the updated installed product.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Get UUID" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">uuid</stringProp>
+              <stringProp name="RegexExtractor.regex">&quot;uuid&quot;:&quot;([0-9a-f\-]{36})&quot;</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default">baduuid</stringProp>
+              <stringProp name="RegexExtractor.match_number">1</stringProp>
+              <stringProp name="Sample.scope">all</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers/{uuid}/entitlements?{params}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements?pool=${poolid}&amp;async=&apos;false&apos;&amp;quantity=1</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_info</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DELETE consumers/{uuid} (post-bind)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}</stringProp>
+            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">Deletes the consumer we just created so that we can have the subscription available again.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/pools" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_POOLS}</stringProp>
+          <stringProp name="TestPlan.comments">owners_account_pools-weighted
+</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/owners_account_pools.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET owners/{ownerkey}/pools" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}/pools</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_pools</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/info" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_INFO}</stringProp>
+          <stringProp name="TestPlan.comments">owners_account_info-weighted</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/owners_account_info.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET owners/{ownerkey}/info" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}/info</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_info</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers?{params}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_CONSUMERS_PARAMS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/get_owners_ownerkey_consumers.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET owners/{ownerkey}/consumers?{params}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="type" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">RHUI</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">type</stringProp>
+                </elementProp>
+                <elementProp name="type" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">system</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">type</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+                <elementProp name="type" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">hypervisor</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">type</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+                <elementProp name="include" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">name</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">include</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+                <elementProp name="include" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">type</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">include</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+                <elementProp name="include" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">entitlementCount</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">include</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+                <elementProp name="include" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">uuid</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">include</stringProp>
+                  <stringProp name="Argument.desc">false</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}/consumers</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates?{params}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_CERTIFICATES_PARAMS}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumer_uuids-serials.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET consumers/{uuid}/certificates?{params}" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="serials" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${serials}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">serials</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/certificates</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT owners/{ownerkey}/subscriptions?{params}" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.PUT_OWNERS_OWNERKEY_SUBSCRIPTIONS_PARAMS}</stringProp>
+          <stringProp name="TestPlan.comments">owners_account_subscriptions-weighted</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/owners_account_subs.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT owners/{ownerkey}/subscriptions" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}/subscriptions</stringProp>
+            <stringProp name="HTTPSampler.method">PUT</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_subscriptions</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49588">202</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT consumers/{uuid}/content_overrides" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.PUT_CONSUMERS_UUID_CONTENT_OVERRIDES}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET jobs?{params}" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_JOBS_PARAMS}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/activation_keys?{params}" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_ACTIVATION_KEYS_PARAMS}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET users/{user}/owners" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_USERS_USER_OWNERS}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS}</stringProp>
+          <stringProp name="TestPlan.comments">autobind</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">vars.put(&quot;consumername&quot;,&quot;simplebind.consumer&quot; + (int) (Math.random() * 10000000));</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers?owner={ownerkey} (pre-bind)" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;name&quot;:&quot;${consumername}&quot;,&#xd;
+  &quot;entitlementCount&quot;:0,&#xd;
+  &quot;facts&quot;:{&#xd;
+    &quot;network.hostname&quot;:&quot;${consumername}&quot;,&#xd;
+    &quot;uname.machine&quot;:&quot;x86_64&quot;,&#xd;
+    &quot;cpu.cpu_socket(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
+    &quot;distributor_version&quot;:null,&#xd;
+    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+  },&#xd;
+  &quot;lastCheckin&quot;:null,&#xd;
+  &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
+  &quot;serviceLevel&quot;:&quot;&quot;,&#xd;
+  &quot;environment&quot;:null,&#xd;
+  &quot;entitlementStatus&quot;:&quot;valid&quot;,&#xd;
+  &quot;installedProducts&quot;:[{&#xd;
+    &quot;productId&quot;:&quot;69&quot;,&#xd;
+    &quot;productName&quot;:&quot;Red Hat Enterprise Linux Server&quot;,&#xd;
+    &quot;version&quot;:&quot;7.0&quot;,&#xd;
+    &quot;arch&quot;:&quot;x86_64&quot;&#xd;
+  }],&#xd;
+  &quot;username&quot;:&quot;${username}&quot;,&#xd;
+  &quot;autoheal&quot;:true,&#xd;
+  &quot;guestIds&quot;:[]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}&amp;include=uuid&amp;test=simplebind</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">create_consumers
+This will create a consumer WITH an installed product. This is unlike how subscription manager does it: It first creates the consumer, then makes another call with the updated installed product.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Path PostProcessor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">uuid</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.uuid</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+              <stringProp name="JSONPostProcessor.defaultValues">baduuid2</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers/{uuid}/entitlements" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_info</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DELETE consumers/{uuid} (post-bind)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}</stringProp>
+            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">Deletes the consumer we just created so that we can have the subscription available again.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="true">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK}</stringProp>
+          <stringProp name="TestPlan.comments">cdk-autobind</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">vars.put(&quot;consumername&quot;,&quot;cdkbind.consumer&quot; + (int) (Math.random() * 10000000));
+vars.put(&quot;productname&quot;,&quot;${TEST.PRODUCTNAME}&quot;);</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers?owner={ownerkey} (pre-bind)" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;name&quot;:&quot;${consumername}&quot;,&#xd;
+  &quot;entitlementCount&quot;:0,&#xd;
+  &quot;facts&quot;:{&#xd;
+    &quot;dev_sku&quot;:&quot;${productname}&quot;,&#xd;
+    &quot;network.hostname&quot;:&quot;${consumername}&quot;,&#xd;
+    &quot;uname.machine&quot;:&quot;x86_64&quot;,&#xd;
+    &quot;cpu.cpu_socket(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
+    &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
+    &quot;distributor_version&quot;:null,&#xd;
+    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+  },&#xd;
+  &quot;lastCheckin&quot;:null,&#xd;
+  &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
+  &quot;serviceLevel&quot;:&quot;&quot;,&#xd;
+  &quot;environment&quot;:null,&#xd;
+  &quot;entitlementStatus&quot;:&quot;valid&quot;,&#xd;
+  &quot;installedProducts&quot;:[],&#xd;
+  &quot;username&quot;:&quot;${username}&quot;,&#xd;
+  &quot;autoheal&quot;:true,&#xd;
+  &quot;guestIds&quot;:[]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}&amp;include=uuid</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">create_consumers
+This will create a consumer WITH an installed product. This is unlike how subscription manager does it: It first creates the consumer, then makes another call with the updated installed product.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Path PostProcessor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">uuid</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.uuid</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+              <stringProp name="JSONPostProcessor.defaultValues">baduuid2</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account_info</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DELETE consumers/{uuid} (post-bind)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}?test=cdk</stringProp>
+            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">Deletes the consumer we just created so that we can have the subscription available again.</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/entitlements" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_CONSUMERS_UUID_ENTITLEMENTS}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/subscriptions" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY_SUBSCRIPTIONS}</stringProp>
+        </ThroughputController>
+        <hashTree/>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_OWNERS_OWNERKEY}</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/owners_account.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">ownerkey</stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET owners/{ownerkey}" enabled="false">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/owners/${ownerkey}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">owners_account</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET pools?owner={ownerkey}" enabled="false">
+          <intProp name="ThroughputController.style">1</intProp>
+          <boolProp name="ThroughputController.perThread">false</boolProp>
+          <intProp name="ThroughputController.maxThroughput">1</intProp>
+          <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_POOLS_PARAMS}</stringProp>
+          <stringProp name="TestPlan.comments">pools_owner_id-weighted</stringProp>
+        </ThroughputController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/pools_owner_id.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">ownerkey</stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET pools?owner={ownerkey}" enabled="false">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="owner" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">${ownerkey}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">owner</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/pools</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            <boolProp name="HTTPSampler.monitor">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="TestPlan.comments">pools_owner_id</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>true</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename">results.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
