@@ -197,7 +197,7 @@
             </elementProp>
             <elementProp name="THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK" elementType="Argument">
               <stringProp name="Argument.name">THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK</stringProp>
-              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK,20.041446)}</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.POST_CONSUMERS_UUID_ENTITLEMENTS_CDK,0.041446)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">POST consumers/{consumeruuid}/entitlements</stringProp>
             </elementProp>

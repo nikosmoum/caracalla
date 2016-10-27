@@ -7,12 +7,12 @@ Currently caracalla houses utilities to performance test candlepin/server.
 ### How to run tests?
 
  * bind.jmx
-   * This test is a basic test that allows to measure performance of multoiple consumers binding against one pool.
+   * This test is a basic test that allows to measure performance of multiple consumers binding against one pool.
    * Steps:
      * Deploy candlepin server ( ./server/bin/deploy -gat )
      * Select a pool generated from the above step and ensure it has a quantity of atleast 100
      * Open the jmx file in jmeter 3.0(+)
-     * Select the node marked Entitlement creation and ovveride the variables to point to your local candlepin
+     * Select the node marked Entitlement creation and override the variables to point to your local candlepin
      * For the first run only, enable the node marked "setUp Thread Group - Run Once". This will create consumers and populate the input file required for the next steps
      * run the jmeter test and observe the results.
  * candlepin-throughput.jmx
