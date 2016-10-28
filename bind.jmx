@@ -29,7 +29,7 @@
           </elementProp>
           <elementProp name="pool_id" elementType="Argument">
             <stringProp name="Argument.name">pool_id</stringProp>
-            <stringProp name="Argument.value">ff80808157a04d750157a06530480f02</stringProp>
+            <stringProp name="Argument.value">ff8080815804eb6b015804ebe166082f</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="owner" elementType="Argument">
@@ -37,9 +37,9 @@
             <stringProp name="Argument.value">candlepin_admin</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="fileExists" elementType="Argument">
-            <stringProp name="Argument.name">fileExists</stringProp>
-            <stringProp name="Argument.value">true</stringProp>
+          <elementProp name="createConsumer" elementType="Argument">
+            <stringProp name="Argument.name">createConsumer</stringProp>
+            <stringProp name="Argument.value">false</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -101,17 +101,20 @@ String DirPath = FileServer.getFileServer().getBaseDir();
 
 // write into jmeter.log file under Jmeter/bin directory
   File f = new File(DirPath+&quot;/consumer_list.csv&quot;);
-
   if (!(f.exists())) {
-     fileExists=&quot;false&quot;;
-
+      vars.put(&quot;createFile&quot;, &quot;true&quot;);
+      log.error(&quot;one&quot;);
 	FileOutputStream c = new FileOutputStream(FileServer.getFileServer().getBaseDir()+&quot;/consumer_list.csv&quot;, true); 
-
 	c.close();
   }else if((f.exists()) &amp;&amp; (f.length()==0)){
-     fileExists=&quot;false&quot;;
+      log.error(&quot;two&quot;);
+      vars.put(&quot;createFile&quot;, &quot;true&quot;);
+  } else {
+      log.error(&quot;three&quot;);
+      vars.put(&quot;createFile&quot;, &quot;false&quot;);
+  }
+  }catch(Throwable ex) {
 
-  }}catch(Throwable ex) {
     log.error(&quot;Beanshell failure: &quot;, ex);
     throw ex;
 }
@@ -122,9 +125,8 @@ String DirPath = FileServer.getFileServer().getBaseDir();
         </BeanShellSampler>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-          <stringProp name="IfController.condition">&quot;${fileExists}&quot;==&quot;true&quot;</stringProp>
+          <stringProp name="IfController.condition">${createFile} ||  ${createConsumer}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
-          <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
           <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -203,11 +205,14 @@ String DirPath = FileServer.getFileServer().getBaseDir();
 uuid_1 = vars.get(&quot;consumer_uuid_1&quot;);
 script_path = vars.get(&quot;SCRIPT_PATH&quot;);
 
-String script_file = script_path + &quot;consumer_list.csv&quot;;
+String script_file = script_path + &quot;/consumer_list.csv&quot;;
+
 
 // Overwrite any existing file
 FileWriter fstream = new FileWriter(script_file, false);
 BufferedWriter out = new BufferedWriter(fstream);
+     log.error(&quot;vritant 4&quot; + script_file);
+
 for (int i = 1; i &lt;= Integer.parseInt(uuid_count); i++) {
 	out.write(vars.get(&quot;consumer_uuid_&quot; + i));
      out.write(System.getProperty(&quot;line.separator&quot;));
@@ -222,9 +227,9 @@ fstream.close();</stringProp>
           </hashTree>
         </hashTree>
         <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
-          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterProperties">true</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
+          <boolProp name="displaySystemProperties">true</boolProp>
         </DebugSampler>
         <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
