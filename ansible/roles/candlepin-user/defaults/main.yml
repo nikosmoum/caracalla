@@ -1,0 +1,18 @@
+---
+candlepin_git_pull: True
+
+candlepin_user: jenkins
+candlepin_user_home:  /home/jenkins
+
+candlepin_git_repo: https://github.com/candlepin/candlepin.git
+candlepin_checkout: /home/jenkins/candlepin
+candlepin_branch: master
+
+# feel free to change arguments but keep in mind
+# the test is meant to work with mysql, so requires -m
+candlepin_deploy_args: "-ma"
+
+caracalla_git_repo: https://github.com/candlepin/caracalla.git
+caracalla_checkout: /home/jenkins/caracalla
+# TODO:change back to master once branch is merged
+caracalla_branch: vritant/ansible

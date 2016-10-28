@@ -1,0 +1,6 @@
+- include: shutdown_vms.yml
+
+- name: Reset snapshot on performance vm
+  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap' --running
+  tags:
+    - skip_ansible_lint

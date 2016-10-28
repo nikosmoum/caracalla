@@ -1,0 +1,11 @@
+---
+- name: fetch list of all vms
+  virt: command=list_vms
+  register: vmlist
+
+- name: shutdown all vms
+  virt: name={{item}} command=shutdown
+  with_items: "{{vmlist.list_vms}}"
+  register: result
+  failed_when:
+    - "result | failed and 'domain is not running' not in result.msg"
