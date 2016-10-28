@@ -24,21 +24,21 @@
           </elementProp>
           <elementProp name="SCRIPT_PATH" elementType="Argument">
             <stringProp name="Argument.name">SCRIPT_PATH</stringProp>
-            <stringProp name="Argument.value">/home/jenkins/caracalla</stringProp>
+            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="pool_id" elementType="Argument">
             <stringProp name="Argument.name">pool_id</stringProp>
-            <stringProp name="Argument.value">ff8080815804eb6b015804ebe166082f</stringProp>
+            <stringProp name="Argument.value">&lt;change me here&gt;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="owner" elementType="Argument">
             <stringProp name="Argument.name">owner</stringProp>
-            <stringProp name="Argument.value">candlepin_admin</stringProp>
+            <stringProp name="Argument.value">&lt;change me here&gt;</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="createConsumer" elementType="Argument">
-            <stringProp name="Argument.name">createConsumer</stringProp>
+          <elementProp name="ForceCreateConsumerFile" elementType="Argument">
+            <stringProp name="Argument.name">ForceCreateConsumerFile</stringProp>
             <stringProp name="Argument.value">false</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
@@ -125,7 +125,7 @@ String DirPath = FileServer.getFileServer().getBaseDir();
         </BeanShellSampler>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-          <stringProp name="IfController.condition">${createFile} ||  ${createConsumer}</stringProp>
+          <stringProp name="IfController.condition">${createFile} ||  ${ForceCreateConsumerFile}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
         </IfController>
         <hashTree>
@@ -216,9 +216,9 @@ BufferedWriter out = new BufferedWriter(fstream);
 for (int i = 1; i &lt;= Integer.parseInt(uuid_count); i++) {
 	out.write(vars.get(&quot;consumer_uuid_&quot; + i));
      out.write(System.getProperty(&quot;line.separator&quot;));
-     log.info(&quot;trying to write the file&quot; + vars.get(&quot;consumer_uuid_&quot; + i));
+
 }
-     log.info(&quot;outside to write the file&quot;);
+
 // out.write(uuid_1);
 out.close();
 fstream.close();</stringProp>
