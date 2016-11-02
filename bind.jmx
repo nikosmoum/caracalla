@@ -205,7 +205,7 @@ String DirPath = FileServer.getFileServer().getBaseDir();
 uuid_1 = vars.get(&quot;consumer_uuid_1&quot;);
 script_path = vars.get(&quot;SCRIPT_PATH&quot;);
 
-String script_file = script_path + &quot;/consumer_list.csv&quot;;
+String script_file = script_path + &quot;consumer_list.csv&quot;;
 
 
 // Overwrite any existing file
@@ -285,7 +285,7 @@ fstream.close();</stringProp>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Consumer List CSV" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">${SCRIPT_PATH}/consumer_list.csv</stringProp>
+          <stringProp name="filename">${SCRIPT_PATH}consumer_list.csv</stringProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">false</boolProp>
           <stringProp name="shareMode">shareMode.group</stringProp>
