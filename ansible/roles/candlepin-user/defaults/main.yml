@@ -1,7 +1,6 @@
 ---
 candlepin_git_pull: True
 
-candlepin_user: jenkins
 candlepin_user_home:  /home/jenkins
 
 candlepin_git_repo: https://github.com/candlepin/candlepin.git

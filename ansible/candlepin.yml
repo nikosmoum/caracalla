@@ -17,7 +17,7 @@
   tags:
     - setupvms
 
-- name: Deploy candlepin and run perfomance test
+- name: Deploy candlepin and run performance test
   hosts: performance-candlepin-vm
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0/

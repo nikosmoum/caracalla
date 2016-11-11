@@ -1,3 +1,4 @@
+---
 - name: Checkout Candlepin
   git:
     repo: "{{candlepin_git_repo}}"

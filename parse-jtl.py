@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 import logging
 import csv
@@ -40,7 +40,7 @@ def parse_options():
         parser.error("You must (only) provide a results file to parse/compare")
     if (options.parse is None and options.compare is None and
             options.pretty_print is None):
-        parser.error("You must choose a command (-p, -pp or -c)")
+        parser.error("You must choose a command (-p, --pretty-print or -c)")
     compare_opts = options.baseline is not None or options.expected is not None
     if (compare_opts and options.compare is None or
             options.compare and (options.baseline is None or
