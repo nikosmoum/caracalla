@@ -35,7 +35,7 @@
             </elementProp>
             <elementProp name="TEST.SAMPLES_PER_MINUTE" elementType="Argument">
               <stringProp name="Argument.name">TEST.SAMPLES_PER_MINUTE</stringProp>
-              <stringProp name="Argument.value">${__P(SAMPLES_PER_MINUTE,180)}</stringProp>
+              <stringProp name="Argument.value">${__P(SAMPLES_PER_MINUTE,6900)}</stringProp>
               <stringProp name="Argument.desc">The throughput to run the tests at. 180/minute means JMeter will attemp a call every 1/3 of a second. Make sure there are enough threads available.</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
