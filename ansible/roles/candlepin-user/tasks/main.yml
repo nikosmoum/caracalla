@@ -59,6 +59,14 @@
     backup: yes
   become: true
 
+- name: Enable debugging
+  replace:
+    dest: /etc/candlepin/candlepin.conf
+    regexp: '#log4j.logger.org.candlepin=DEBUG'
+    replace: 'log4j.logger.org.candlepin=DEBUG'
+    backup: yes
+  become: true
+
 - name: Restart tomcat
   service:
     name: tomcat
@@ -88,8 +96,18 @@
   tags:
     - jmeter-step
 
+- name: Fetch results
+  fetch:
+    src: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
+    dest: "results-{{candlepin_branch}}.csv"
+    flat: yes
+  tags:
+    - jmeter-step
+
 - name: Evaluate result
   command: "./parse-jtl.py -c candlepin-throughput/results.jtl -b candlepin-throughput/baseline-pass.dict -e candlepin-throughput/expected.dict -o output.txt"
   args:
     chdir: "{{caracalla_checkout}}"
     creates: "{{caracalla_checkout}}/output.txt"
+  tags:
+    - jmeter-step

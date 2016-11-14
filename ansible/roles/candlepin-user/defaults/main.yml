@@ -9,7 +9,7 @@ candlepin_branch: master
 
 # feel free to change arguments but keep in mind
 # the test is meant to work with mysql, so requires -m
-candlepin_deploy_args: "-ma"
+candlepin_deploy_args: "-maH"
 
 caracalla_git_repo: https://github.com/candlepin/caracalla.git
 caracalla_checkout: /home/jenkins/caracalla

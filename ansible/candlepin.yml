@@ -12,7 +12,7 @@
   connection: local
   tasks:
       - name: Wait for ddns to kick in
-        local_action: wait_for port=22 host={{item}} search_regex=OpenSSH
+        local_action: wait_for port=22 host={{item}} search_regex=OpenSSH connect_timeout=600
         with_items: "{{performance_vm_hostnames}}"
   tags:
     - setupvms
