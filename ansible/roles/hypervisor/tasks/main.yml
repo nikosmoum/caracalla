@@ -1,6 +1,14 @@
 ---
 - include: shutdown_vms.yml
 
+- name: Wait for vms to shutdown
+  wait_for:
+    port=22
+    host={{perf_vm_hostname}}
+    search_regex=OpenSSH
+    connect_timeout=600
+    state=stopped
+
 - name: Reset snapshot on performance vm
   command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap' --running
   tags:

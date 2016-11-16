@@ -20,7 +20,7 @@ def parse_options():
     parser.add_option("-p", "--parse",
                       action="store_true",
                       dest="parse",
-                      help="parse to compute a dictiionary.")
+                      help="parse to compute a dictionary.")
     parser.add_option("-c", "--compare",
                       action="store_true",
                       dest="compare",
@@ -117,7 +117,7 @@ def main():
         expected_txt = open(options.expected, 'r').read()
         output_txt = compare_csv(dict, eval(baseline_txt), eval(expected_txt))
         if not output_txt:
-            succesful_compare = True
+            successful_compare = True
             output_txt = "Successful compare!"
 
     if options.output is not None:
