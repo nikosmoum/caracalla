@@ -1484,7 +1484,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
         </ThroughputController>
         <hashTree>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements_cdk.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
