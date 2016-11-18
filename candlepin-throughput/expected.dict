@@ -1,0 +1,82 @@
+{
+  "GET status": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/entitlements?{params}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "PUT consumers/{uuid}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/compliance": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "POST consumers/{uuid}/entitlements (CDK)": {
+    "required_success": 0,
+    "allowed_deviance": 10
+  },
+  "GET owners/{ownerkey}/info": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "POST consumers/{uuid}/entitlements": {
+    "required_success": 90,
+    "allowed_deviance": 18
+  },
+  "GET owners/{ownerkey}/consumers": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "DELETE consumers/{uuid} (post-bind)": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/owner": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "POST hypervisors?owner={ownerkey}": {
+    "required_success": 0,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/content_overrides": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "POST consumers?owner={ownerkey} (pre-bind)": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "PUT owners/{ownerkey}/subscriptions": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "POST consumers/{uuid}/entitlements?{params}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/release": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/certificates?{params}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET owners/{ownerkey}/consumers?{params}": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  },
+  "GET consumers/{uuid}/certificates/serials": {
+    "required_success": 90,
+    "allowed_deviance": 10
+  }
+}

@@ -1,0 +1,113 @@
+---
+- name: Checkout Candlepin
+  git:
+    repo: "{{candlepin_git_repo}}"
+    dest: "{{candlepin_checkout}}"
+    force: yes
+    version: "{{candlepin_branch}}"
+  when: "{{candlepin_git_pull}}"
+
+- name: Run Bundle install
+  command: /usr/local/bin/bundle install
+  args:
+      chdir: "{{candlepin_checkout}}"
+  tags:
+    - skip_ansible_lint
+
+- name: Add JAVA_HOME to bashrc
+  lineinfile:
+    dest: "{{candlepin_user_home}}/.bashrc"
+    line: "export JAVA_HOME=/usr/lib/jvm/java-1.8.0/"
+
+- name: Check for zshrc
+  stat:
+    path: "{{candlepin_user_home}}/.zshrc"
+  register: zshrc_file
+
+- name: Add JAVA_HOME to zshrc
+  lineinfile:
+    dest: "{{candlepin_user_home}}/.zshrc"
+    line: "export JAVA_HOME=/usr/lib/jvm/java-1.8.0/"
+  when: zshrc_file.stat.exists
+
+#The snapshot should have it cleared already. move this to the script used to setup vm later
+#- name: Clear liquibase checksum
+#  shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql:///candlepin\" --username=candlepin clearChecksums"
+#  args:
+#    chdir: "{{candlepin_checkout}}"
+#  tags:
+#   - candlepin-user
+#   - candlepin-deploy
+
+- name: Deploy the candlepin server
+  command: "./server/bin/deploy {{candlepin_deploy_args}}"
+  args:
+    chdir: "{{candlepin_checkout}}"
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{candlepin_user_home}}/bin"
+    JAVA_HOME: "/usr/lib/jvm/java-1.8.0/"
+    TERM: "xterm-256color"
+  tags:
+    - candlepin-deploy
+    - skip_ansible_lint
+
+- name: Ensure candlepin talks to appropriate mysql
+  replace:
+    dest: /etc/candlepin/candlepin.conf
+    regexp: 'mysql:///candlepin'
+    replace: 'mysql://{{mysql_vm_hostname}}:3306/candlepin'
+    backup: yes
+  become: true
+
+- name: Enable debugging
+  replace:
+    dest: /etc/candlepin/candlepin.conf
+    regexp: '#log4j.logger.org.candlepin=DEBUG'
+    replace: 'log4j.logger.org.candlepin=DEBUG'
+    backup: yes
+  become: true
+
+- name: Restart tomcat
+  service:
+    name: tomcat
+    state: restarted
+  become: true
+
+- name: Verify candlepin has started
+  get_url:
+    url: https://localhost:8443/candlepin/status
+    dest: /tmp/status_result.txt
+    validate_certs: no
+    timeout: 360
+
+- name: Checkout Caracalla
+  git:
+    repo: "{{caracalla_git_repo}}"
+    dest: "{{caracalla_checkout}}"
+    force: yes
+    version: "{{caracalla_branch}}"
+  when: "{{candlepin_git_pull}}"
+
+- name: Run jmeter test
+  command: /opt/apache-jmeter-3.0/bin/jmeter -n -t candlepin-throughput.jmx -p "{{candlepin_user_home}}/candlepin-throughput.prop"
+  args:
+    chdir: "{{caracalla_checkout}}/candlepin-throughput"
+    creates: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
+  tags:
+    - jmeter-step
+
+- name: Fetch results
+  fetch:
+    src: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
+    dest: "results-{{candlepin_branch}}.csv"
+    flat: yes
+  tags:
+    - jmeter-step
+
+- name: Evaluate result
+  command: "./parse-jtl.py -c candlepin-throughput/results.jtl -b candlepin-throughput/baseline-pass.dict -e candlepin-throughput/expected.dict -o output.txt"
+  args:
+    chdir: "{{caracalla_checkout}}"
+    creates: "{{caracalla_checkout}}/output.txt"
+  tags:
+    - jmeter-step

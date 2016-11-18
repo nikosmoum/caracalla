@@ -35,7 +35,7 @@
             </elementProp>
             <elementProp name="TEST.SAMPLES_PER_MINUTE" elementType="Argument">
               <stringProp name="Argument.name">TEST.SAMPLES_PER_MINUTE</stringProp>
-              <stringProp name="Argument.value">${__P(SAMPLES_PER_MINUTE,180)}</stringProp>
+              <stringProp name="Argument.value">${__P(SAMPLES_PER_MINUTE,6900)}</stringProp>
               <stringProp name="Argument.desc">The throughput to run the tests at. 180/minute means JMeter will attemp a call every 1/3 of a second. Make sure there are enough threads available.</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
@@ -935,7 +935,7 @@ Note that this will first create a consumer (with an installed product), then bi
     &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
     &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
     &quot;distributor_version&quot;:null,&#xd;
-    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+    &quot;virt.is_guest&quot;:&quot;true&quot;&#xd;
   },&#xd;
   &quot;lastCheckin&quot;:null,&#xd;
   &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
@@ -963,7 +963,7 @@ Note that this will first create a consumer (with an installed product), then bi
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}&amp;test=pooldbind</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -977,15 +977,12 @@ Note that this will first create a consumer (with an installed product), then bi
 This will create a consumer WITH an installed product. This is unlike how subscription manager does it: It first creates the consumer, then makes another call with the updated installed product.</stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Get UUID" enabled="true">
-              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-              <stringProp name="RegexExtractor.refname">uuid</stringProp>
-              <stringProp name="RegexExtractor.regex">&quot;uuid&quot;:&quot;([0-9a-f\-]{36})&quot;</stringProp>
-              <stringProp name="RegexExtractor.template">$1$</stringProp>
-              <stringProp name="RegexExtractor.default">baduuid</stringProp>
-              <stringProp name="RegexExtractor.match_number">1</stringProp>
-              <stringProp name="Sample.scope">all</stringProp>
-            </RegexExtractor>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Path PostProcessor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">uuid</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.uuid</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+              <stringProp name="JSONPostProcessor.defaultValues">baduuid0</stringProp>
+            </JSONPostProcessor>
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST consumers/{uuid}/entitlements?{params}" enabled="true">
@@ -998,7 +995,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements?pool=${poolid}&amp;async=&apos;false&apos;&amp;quantity=1</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements?pool=${poolid}&amp;async=&apos;false&apos;&amp;quantity=1&amp;test=pooldbind</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1020,7 +1017,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}?test=pooldbind</stringProp>
             <stringProp name="HTTPSampler.method">DELETE</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1383,7 +1380,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
     &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
     &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
     &quot;distributor_version&quot;:null,&#xd;
-    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+    &quot;virt.is_guest&quot;:&quot;true&quot;&#xd;
   },&#xd;
   &quot;lastCheckin&quot;:null,&#xd;
   &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
@@ -1443,7 +1440,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements?test=simplebind</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1465,7 +1462,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}?test=simplebind</stringProp>
             <stringProp name="HTTPSampler.method">DELETE</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1487,7 +1484,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
         </ThroughputController>
         <hashTree>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements_cdk.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
@@ -1522,7 +1519,7 @@ vars.put(&quot;productname&quot;,&quot;${TEST.PRODUCTNAME}&quot;);</stringProp>
     &quot;cpu.cpu(s)&quot;:&quot;1&quot;,&#xd;
     &quot;system.certificate_version&quot;:&quot;3.0&quot;,&#xd;
     &quot;distributor_version&quot;:null,&#xd;
-    &quot;virt.is_guest&quot;:&quot;false&quot;&#xd;
+    &quot;virt.is_guest&quot;:&quot;true&quot;&#xd;
   },&#xd;
   &quot;lastCheckin&quot;:null,&#xd;
   &quot;type&quot;:{&quot;manifest&quot;:false,&quot;id&quot;:&quot;6&quot;,&quot;label&quot;:&quot;system&quot;},&#xd;
@@ -1545,7 +1542,7 @@ vars.put(&quot;productname&quot;,&quot;${TEST.PRODUCTNAME}&quot;);</stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}&amp;include=uuid</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/?owner=${ownerkey}&amp;include=uuid&amp;test=cdk</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1577,7 +1574,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements</stringProp>
+            <stringProp name="HTTPSampler.path">${ENV.PATH}/consumers/${uuid}/entitlements?test=cdk</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

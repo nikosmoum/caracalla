@@ -1,0 +1,29 @@
+---
+- name: Shutdown all vms on hypervisors and reset performance vms
+  hosts: performance-hypervisors
+  roles:
+    - hypervisor
+  vars:
+    ansible_user: root
+  tags:
+    - setupvms
+
+- hosts: localhost
+  connection: local
+  tasks:
+      - name: Wait for ddns to kick in
+        local_action: wait_for port=22 host={{item}} search_regex=OpenSSH connect_timeout=600
+        with_items: "{{performance_vm_hostnames}}"
+  tags:
+    - setupvms
+
+- name: Deploy candlepin and run performance test
+  hosts: performance-candlepin-vm
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-1.8.0/
+  roles:
+    - candlepin-user
+  vars:
+    ansible_user: jenkins
+  tags:
+    - runtest
