@@ -29,7 +29,7 @@
             </elementProp>
             <elementProp name="TEST.DURATION_SECONDS" elementType="Argument">
               <stringProp name="Argument.name">TEST.DURATION_SECONDS</stringProp>
-              <stringProp name="Argument.value">${__P(DURATION_SECONDS,600)}</stringProp>
+              <stringProp name="Argument.value">${__P(DURATION_SECONDS,3600)}</stringProp>
               <stringProp name="Argument.desc">How long the test should run, in seconds.</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>

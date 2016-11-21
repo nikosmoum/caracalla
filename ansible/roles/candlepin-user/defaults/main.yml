@@ -14,4 +14,4 @@ candlepin_deploy_args: "-maH"
 caracalla_git_repo: https://github.com/candlepin/caracalla.git
 caracalla_checkout: /home/jenkins/caracalla
 # TODO:change back to master once branch is merged
-caracalla_branch: vritant/ansible
+caracalla_branch: master
