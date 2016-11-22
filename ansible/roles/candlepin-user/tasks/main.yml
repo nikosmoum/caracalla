@@ -59,6 +59,16 @@
     backup: yes
   become: true
 
+- name: Clear liquibase checksum
+  shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql://{{mysql_vm_hostname}}:3306/candlepin\" --username=candlepin clearChecksums"
+  args:
+    chdir: "{{candlepin_checkout}}"
+
+- name: Update liquibase checksum
+  shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql://{{mysql_vm_hostname}}:3306/candlepin\" --username=candlepin update -Dcommunity=true"
+  args:
+    chdir: "{{candlepin_checkout}}"
+
 - name: Enable debugging
   replace:
     dest: /etc/candlepin/candlepin.conf
@@ -67,11 +77,19 @@
     backup: yes
   become: true
 
+- name: pause for tomcat before restart
+  pause:
+    minutes: 3
+
 - name: Restart tomcat
   service:
     name: tomcat
     state: restarted
   become: true
+
+- name: pause for tomcat to start
+  pause:
+    minutes: 3
 
 - name: Verify candlepin has started
   get_url:
@@ -88,26 +106,61 @@
     version: "{{caracalla_branch}}"
   when: "{{candlepin_git_pull}}"
 
+
+- name: Write test properties to properties file
+  lineinfile: line={{item}} dest="{{candlepin_user_home}}/candlepin-throughput.prop"
+  with_items: "{{jmeter_test_properties}}"
+
+- name: Remove results file if present
+  file:
+    path: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
+    state: absent
+  tags:
+    - jmeter-step
+
+- name: Remove parsed results file if present
+  file:
+    path: "{{caracalla_checkout}}/parsed-results.txt"
+    state: absent
+  tags:
+    - jmeter-step
+
 - name: Run jmeter test
   command: /opt/apache-jmeter-3.0/bin/jmeter -n -t candlepin-throughput.jmx -p "{{candlepin_user_home}}/candlepin-throughput.prop"
   args:
     chdir: "{{caracalla_checkout}}/candlepin-throughput"
-    creates: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
   tags:
     - jmeter-step
+    - skip_ansible_lint
 
-- name: Fetch results
+#- name: Evaluate result. This is pointless for now till we have a reliable test
+#  command: "./parse-jtl.py -c candlepin-throughput/results.jtl -b candlepin-throughput/baseline.dict -e candlepin-throughput/expected.dict -o output.txt"
+#  args:
+#    chdir: "{{caracalla_checkout}}"
+#    creates: "{{caracalla_checkout}}/output.txt"
+#  tags:
+#    - jmeter-step
+
+- name: Fetch results file
   fetch:
     src: "{{caracalla_checkout}}/candlepin-throughput/results.jtl"
-    dest: "results-{{candlepin_branch}}.csv"
+    dest: "results.jtl"
     flat: yes
   tags:
     - jmeter-step
 
-- name: Evaluate result
-  command: "./parse-jtl.py -c candlepin-throughput/results.jtl -b candlepin-throughput/baseline-pass.dict -e candlepin-throughput/expected.dict -o output.txt"
+- name: Parse result
+  command: "./parse-jtl.py --pretty-print candlepin-throughput/results.jtl -o parsed-results.txt"
   args:
     chdir: "{{caracalla_checkout}}"
-    creates: "{{caracalla_checkout}}/output.txt"
+    creates: "{{caracalla_checkout}}/parsed-results.txt"
+  tags:
+    - jmeter-step
+
+- name: Fetch parsed results file
+  fetch:
+    src: "{{caracalla_checkout}}/parsed-results.txt"
+    dest: "parsed-results.txt"
+    flat: yes
   tags:
     - jmeter-step

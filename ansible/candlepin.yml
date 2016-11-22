@@ -5,15 +5,10 @@
     - hypervisor
   vars:
     ansible_user: root
-  tags:
-    - setupvms
-
-- hosts: localhost
-  connection: local
   tasks:
-      - name: Wait for ddns to kick in
-        local_action: wait_for port=22 host={{item}} search_regex=OpenSSH connect_timeout=600
-        with_items: "{{performance_vm_hostnames}}"
+    - name: sleep for ddns to kick in
+      pause:
+        minutes: 10
   tags:
     - setupvms
 

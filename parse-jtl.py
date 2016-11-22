@@ -108,9 +108,9 @@ def main():
     if options.parse:
         output_txt = dict
     elif options.pretty_print:
-        output_txt = "success percentage, average time elapsed, API\n"
+        output_txt = "success %, average time elapsed, API\n"
         for key, result in dict.items():
-            output_txt += "success=%s%%, average=%s,  %s \n" \
+            output_txt += "%s, %s, %s \n" \
                 % (result["success_%"], result["average"], key)
     else:
         baseline_txt = open(options.baseline, 'r').read()

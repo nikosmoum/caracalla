@@ -15,3 +15,7 @@ caracalla_git_repo: https://github.com/candlepin/caracalla.git
 caracalla_checkout: /home/jenkins/caracalla
 # TODO:change back to master once branch is merged
 caracalla_branch: master
+
+jmeter_test_properties:
+ - DURATION_SECONDS=3600
+ - SAMPLES_PER_MINUTE=6900
