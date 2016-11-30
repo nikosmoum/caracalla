@@ -65,7 +65,7 @@
             </elementProp>
             <elementProp name="THROUGHPUT.GET_CONSUMERS_UUID" elementType="Argument">
               <stringProp name="Argument.name">THROUGHPUT.GET_CONSUMERS_UUID</stringProp>
-              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID,16.026716)}</stringProp>
+              <stringProp name="Argument.value">${__P(THROUGHPUT.GET_CONSUMERS_UUID,22.026716)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
               <stringProp name="Argument.desc">GET consumers/{consumeruuid}</stringProp>
             </elementProp>
@@ -375,7 +375,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           <stringProp name="throughput">${TEST.SAMPLES_PER_MINUTE}</stringProp>
         </ConstantThroughputTimer>
         <hashTree/>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/release" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/release" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -424,7 +424,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET status" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET status" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -495,7 +495,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates/serials" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates/serials" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -536,7 +536,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/content_overrides" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/content_overrides" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -576,7 +576,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/compliance" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/compliance" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -616,7 +616,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/owner" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/owner" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -656,7 +656,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT consumers/{uuid}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT consumers/{uuid}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -703,7 +703,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST hypervisors?owner={ownerkey}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST hypervisors?owner={ownerkey}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -796,7 +796,7 @@ vars.put(&quot;report&quot;, report);
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -836,7 +836,7 @@ vars.put(&quot;report&quot;, report);
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/entitlements?{params}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/entitlements?{params}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -891,7 +891,7 @@ vars.put(&quot;report&quot;, report);
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements?{params}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements?{params}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1030,7 +1030,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/pools" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/pools" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1073,7 +1073,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/info" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/info" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1115,7 +1115,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers?{params}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET owners/{ownerkey}/consumers?{params}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1211,7 +1211,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates?{params}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="GET consumers/{uuid}/certificates?{params}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1259,7 +1259,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT owners/{ownerkey}/subscriptions?{params}" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="PUT owners/{ownerkey}/subscriptions?{params}" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1338,7 +1338,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_USERS_USER_OWNERS}</stringProp>
         </ThroughputController>
         <hashTree/>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1475,7 +1475,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>

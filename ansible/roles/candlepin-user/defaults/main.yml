@@ -17,5 +17,5 @@ caracalla_checkout: /home/jenkins/caracalla
 caracalla_branch: master
 
 jmeter_test_properties:
- - DURATION_SECONDS=3600
+ - DURATION_SECONDS=1200
  - SAMPLES_PER_MINUTE=6900

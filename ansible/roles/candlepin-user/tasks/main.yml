@@ -93,6 +93,13 @@
   lineinfile: line={{item}} dest="{{candlepin_user_home}}/candlepin-throughput.prop"
   with_items: "{{jmeter_test_properties}}"
 
+- name: Copy test csv
+  copy:
+    src=/tmp/consumers_uuid.csv
+    dest={{candlepin_user_home}}/input_data/test-stage/consumers_uuid.csv
+    owner=jenkins
+    group=jenkins
+
 - name: Run jmeter test
   command: /opt/apache-jmeter-3.0/bin/jmeter -n -t candlepin-throughput.jmx -p "{{candlepin_user_home}}/candlepin-throughput.prop"
   args:
