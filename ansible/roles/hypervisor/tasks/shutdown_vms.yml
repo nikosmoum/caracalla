@@ -4,7 +4,7 @@
   register: vmlist
 
 - name: shutdown all vms
-  virt: name={{item}} command=shutdown
+  virt: name={{item}} command=destroy
   with_items: "{{vmlist.list_vms}}"
   register: result
   failed_when:
