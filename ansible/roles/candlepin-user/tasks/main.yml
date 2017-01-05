@@ -164,3 +164,9 @@
     flat: yes
   tags:
     - jmeter-step
+
+- name: Fetch candlepin.log
+  fetch:
+    src: "/var/log/candlepin/candlepin.log"
+    dest: "candlepin.log"
+    flat: yes
