@@ -59,6 +59,9 @@
     backup: yes
   become: true
 
+- name: Update mysql vm post reset
+  shell: mysql -h {{mysql_vm_hostname}} -u candlepin candlepin < {{caracalla_checkout}}/ansible/resources/import.sql
+
 - name: Clear liquibase checksum
   shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql://{{mysql_vm_hostname}}:3306/candlepin\" --username=candlepin clearChecksums"
   args:
