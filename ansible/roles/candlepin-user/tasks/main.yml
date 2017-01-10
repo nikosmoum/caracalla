@@ -7,6 +7,14 @@
     version: "{{candlepin_branch}}"
   when: "{{candlepin_git_pull}}"
 
+- name: Checkout Caracalla
+  git:
+    repo: "{{caracalla_git_repo}}"
+    dest: "{{caracalla_checkout}}"
+    force: yes
+    version: "{{caracalla_branch}}"
+  when: "{{candlepin_git_pull}}"
+
 - name: Run Bundle install
   command: /usr/local/bin/bundle install
   args:
@@ -100,15 +108,6 @@
     dest: /tmp/status_result.txt
     validate_certs: no
     timeout: 360
-
-- name: Checkout Caracalla
-  git:
-    repo: "{{caracalla_git_repo}}"
-    dest: "{{caracalla_checkout}}"
-    force: yes
-    version: "{{caracalla_branch}}"
-  when: "{{candlepin_git_pull}}"
-
 
 - name: Write test properties to properties file
   lineinfile: line={{item}} dest="{{candlepin_user_home}}/candlepin-throughput.prop"
