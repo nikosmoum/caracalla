@@ -2,7 +2,6 @@
 
 import logging
 import csv
-import sys
 
 from optparse import OptionParser
 
@@ -109,7 +108,7 @@ def main():
         output_txt = dict
     elif options.pretty_print:
         output_txt = "success %, average time elapsed, API\n"
-        for key, result in dict.items():
+        for key, result in sorted(dict.items()):
             output_txt += "%s, %s, %s \n" \
                 % (result["success_%"], result["average"], key)
     else:
@@ -131,4 +130,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
