@@ -172,3 +172,9 @@
     src: "/var/log/candlepin/candlepin.log"
     dest: "candlepin.log"
     flat: yes
+
+- name: Fetch access.log
+  fetch:
+    src: "/var/log/candlepin/access.log"
+    dest: "access.log"
+    flat: yes
