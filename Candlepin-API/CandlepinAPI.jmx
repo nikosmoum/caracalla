@@ -148,6 +148,12 @@
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">Define the loop counter value common for all the thread groups</stringProp>
           </elementProp>
+          <elementProp name="HYPERVISOR.REPORT.COUNT" elementType="Argument">
+            <stringProp name="Argument.name">HYPERVISOR.REPORT.COUNT</stringProp>
+            <stringProp name="Argument.value">${__P(HYPERVISOR_REPORT_COUNT,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Define the loop counter value for hypervisor register</stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
@@ -233,7 +239,77 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Consumer Create/Delete" enabled="true">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Hypervisor Register" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${HYPERVISOR.REPORT.COUNT}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1480595392000</longProp>
+        <longProp name="ThreadGroup.end_time">1480595392000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">cp-user</stringProp>
+              <stringProp name="Header.value">admin</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="filename">${file_path}hypervisor_register.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Hypervisor" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;8c693ba6-4269-474b-a7a2-9b5f8a12ca83&quot;: &#xd;
+[{&quot;guestId&quot;: &quot;6fd64b37-e40d-4992-9be4-381439ae4c93&quot;, &quot;state&quot;: 1},&#xd;
+{&quot;guestId&quot;: &quot;5a3eb6bb-cc12-4fb2-87ea-dd12a10e655c&quot;, &quot;state&quot;: 1},&#xd;
+{&quot;guestId&quot;: &quot;7c0723eb-1bc6-4e1f-a30c-5488123f2f48&quot;, &quot;state&quot;: 1}]}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/hypervisors?owner=${owner}&amp;environments=${environment_id}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+      </hashTree>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Create Consumer - activation key" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -261,18 +337,7 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">${file_path}owners.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="delimiter">,</stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.group</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Consumer POST" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Activation key consumer CREATE" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -282,16 +347,16 @@
   &quot;name&quot;: &quot;mymachine1&quot;,&#xd;
   &quot;type&quot;: {&#xd;
     &quot;id&quot;: &quot;1000&quot;,&#xd;
-    &quot;label&quot;: &quot;system&quot;,&#xd;
+    &quot;label&quot;: &quot;candlepin&quot;,&#xd;
     &quot;manifest&quot;: false&#xd;
   },&#xd;
   &quot;capabilities&quot;: [{&quot;name&quot;:&quot;cert_v3&quot;}],&#xd;
   &quot;facts&quot;: {&quot;system.certificate_version&quot;: &quot;3.5&quot;},&#xd;
   &quot;installedProducts&quot;: [{&#xd;
-      &quot;productId&quot;: &quot;69&quot;,&#xd;
-      &quot;productName&quot;: &quot;Red Hat Enterprise Linux Server&quot;,&#xd;
-      &quot;version&quot;: &quot;6.5&quot;,&#xd;
-      &quot;arch&quot;: &quot;x86_64&quot;&#xd;
+    &quot;productId&quot;: &quot;69&quot;,&#xd;
+    &quot;productName&quot;: &quot;Red Hat Enterprise Linux Server&quot;,&#xd;
+    &quot;version&quot;: &quot;6.5&quot;,&#xd;
+    &quot;arch&quot;: &quot;x86_64&quot;&#xd;
     }]&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
@@ -304,7 +369,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owners}</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owner}&amp;activation_keys=${activation_key}</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -315,13 +380,24 @@
         </HTTPSamplerProxy>
         <hashTree>
           <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Path PostProcessor" enabled="true">
-            <stringProp name="JSONPostProcessor.referenceNames">consumer_uuid</stringProp>
+            <stringProp name="JSONPostProcessor.referenceNames">consumer_uuid1</stringProp>
             <stringProp name="JSONPostProcessor.jsonPathExprs">$..uuid</stringProp>
             <stringProp name="JSONPostProcessor.match_numbers">-1</stringProp>
           </JSONPostProcessor>
           <hashTree/>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">${file_path}create_consumers_activationkey.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">false</boolProp>
+            <boolProp name="stopThread">true</boolProp>
+            <stringProp name="shareMode">shareMode.group</stringProp>
+          </CSVDataSet>
+          <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Consumer DELETE" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Activation key consumer DELETE" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
@@ -331,7 +407,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/consumers/${consumer_uuid}</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/consumers/${consumer_uuid1}</stringProp>
           <stringProp name="HTTPSampler.method">DELETE</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -342,7 +418,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Create Consumer" enabled="false">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Create Consumer - environment" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -381,33 +457,14 @@
           <stringProp name="shareMode">shareMode.group</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">${file_path}create_consumers_activationkey.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="delimiter">,</stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">false</boolProp>
-          <boolProp name="stopThread">true</boolProp>
-          <stringProp name="shareMode">shareMode.group</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create consumer using activation-key against an environment" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Environment CREATE" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&#xd;
-  &quot;name&quot;: &quot;mymachine1&quot;,&#xd;
-  &quot;type&quot;: {&#xd;
-    &quot;id&quot;: &quot;1000&quot;,&#xd;
-    &quot;label&quot;: &quot;candlepin&quot;,&#xd;
-    &quot;manifest&quot;: false&#xd;
-  },&#xd;
-  &quot;capabilities&quot;: [{&quot;name&quot;:&quot;cert_v3&quot;}],&#xd;
-  &quot;facts&quot;: {&quot;system.certificate_version&quot;: &quot;3.5&quot;} &#xd;
-}</stringProp>
+                <stringProp name="Argument.value">{&quot;name&quot;: &quot;${owner}_env&quot;,&#xd;
+&quot;id&quot;: &quot;${environment_id}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -418,7 +475,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owner}&amp;activation_keys=${activation_key}</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/owners/${owner}/environments</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -428,7 +485,7 @@
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create consumer against environment" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Environment consumer CREATE" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
@@ -442,10 +499,16 @@
     &quot;manifest&quot;: true&#xd;
   },&#xd;
     &quot;environment&quot;: {&#xd;
-       &quot;id&quot;:&quot;${environment_id}&quot;&#xd;
+       &quot;id&quot;:&quot;${owner}_env&quot;&#xd;
     },&#xd;
   &quot;capabilities&quot;: [{&quot;name&quot;:&quot;cert_v3&quot;}],&#xd;
-  &quot;facts&quot;: {&quot;system.certificate_version&quot;: &quot;3.5&quot;} &#xd;
+  &quot;facts&quot;: {&quot;system.certificate_version&quot;: &quot;3.5&quot;},&#xd;
+  &quot;installedProducts&quot;: [{&#xd;
+    &quot;productId&quot;: &quot;69&quot;,&#xd;
+    &quot;productName&quot;: &quot;Red Hat Enterprise Linux Server&quot;,&#xd;
+    &quot;version&quot;: &quot;6.5&quot;,&#xd;
+    &quot;arch&quot;: &quot;x86_64&quot;&#xd;
+  }]&#xd;
 }</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -457,7 +520,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owner_env}</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owner}</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -466,20 +529,17 @@
           <boolProp name="HTTPSampler.monitor">false</boolProp>
           <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
         </HTTPSamplerProxy>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Register Hypervisor" enabled="true">
-          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;8c693ba6-4269-474b-a7a2-9b5f8a12ca83&quot;: &#xd;
-[{&quot;guestId&quot;: &quot;6fd64b37-e40d-4992-9be4-381439ae4c93&quot;, &quot;state&quot;: 1},&#xd;
-{&quot;guestId&quot;: &quot;5a3eb6bb-cc12-4fb2-87ea-dd12a10e655c&quot;, &quot;state&quot;: 1},&#xd;
-{&quot;guestId&quot;: &quot;7c0723eb-1bc6-4e1f-a30c-5488123f2f48&quot;, &quot;state&quot;: 1}]}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Path PostProcessor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">consumer_uuid2</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$..uuid</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">-1</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Environment consumer DELETE" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain"></stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
@@ -487,8 +547,28 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/hypervisors?owner=${owner}&amp;environments=${environment_id}</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/consumers/${consumer_uuid2}</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Environment DELETE" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/environments/${owner}_env</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -2294,7 +2374,7 @@ fstream.close();
             <idleTime>true</idleTime>
           </value>
         </objProp>
-        <stringProp name="filename"></stringProp>
+        <stringProp name="filename">results-CandlepinAPI.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
