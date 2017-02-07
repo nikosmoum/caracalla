@@ -1,126 +1,126 @@
 {
   "csvs": [
     {
-      "name": "Candlepin-API/get_consumers.csv",
+      "name": "Candlepin-API/input_data_files/get_consumers.csv",
       "projection": "f.element as fact, cp.uuid as consumer_id, t.label as type, o.account as owner, cp.username as username",
       "from": "cp_consumer cp, cp_consumer_facts f, cp_owner o, cp_consumer_type t",
       "selection": "f.cp_consumer_id = cp.id and f.mapkey = 'virt.uuid' and o.id = cp.owner_id and cp.type_id = t.id",
       "owner_id_column": "cp.owner_id"
     },
     {
-      "name": "Candlepin-API/Virt_Guest.csv",
+      "name": "Candlepin-API/input_data_files/Virt_Guest.csv",
       "projection": "distinct cp1.uuid as host_uuid",
       "from": "cp_consumer_guests cg, cp_consumer cp1, cp_consumer_facts cf1, cp_consumer cp2, cp_consumer_facts cf2",
       "selection": "cp1.id = cg.consumer_id and cg.guest_id = cf1.element and cf1.mapkey = 'virt.uuid' and cp1.uuid <> cp2.uuid and cp2.id = cf2.cp_consumer_id and cf2.mapkey = 'virt.uuid'",
       "owner_id_column": "cp1.owner_id"
     },
     {
-      "name": "Candlepin-API/consumers_with_ents.csv",
+      "name": "Candlepin-API/input_data_files/consumers_with_ents.csv",
       "projection": "c.uuid as uuid_With_Ent, e.id as entitlement_id",
       "from": "cp_entitlement e, cp_consumer c",
       "selection": "c.id = e.consumer_id",
       "owner_id_column": "c.owner_id"
     },
     {
-      "name": "Candlepin-API/consumers_with_available_pools.csv",
+      "name": "Candlepin-API/input_data_files/consumers_with_available_pools.csv",
       "projection": "c.uuid, e.pool_id as poolId",
       "from": "cp_entitlement e, cp_consumer c",
       "selection": "c.id = e.consumer_id",
       "owner_id_column": "c.owner_id"
     },
     {
-      "name": "Candlepin-API/hypervisor_register.csv",
+      "name": "Candlepin-API/input_data_files/hypervisor_register.csv",
       "projection": "account as owner",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/Virt_Host.csv",
+      "name": "Candlepin-API/input_data_files/Virt_Host.csv",
       "projection": "distinct cp.uuid as guest_uuid",
       "from": "cp_consumer_facts cf, cp_consumer cp, cp_consumer_guests cg",
       "selection": "cp.id = cf.cp_consumer_id and cf.element = cg.guest_id and cg.guest_id <> ''",
       "owner_id_column": "cp.owner_id"
     },
     {
-      "name": "Candlepin-API/owners.csv",
+      "name": "Candlepin-API/input_data_files/owners.csv",
       "projection": "account as owners",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/create_consumers_activationkey.csv",
+      "name": "Candlepin-API/input_data_files/create_consumers_activationkey.csv",
       "projection": "o.account as owner, a.id as activation_key",
       "from": "cp_activation_key a, cp_owner o",
       "selection": "o.id = a.owner_id",
       "owner_id_column": "o.id"
     },
     {
-      "name": "Candlepin-API/create_consumers_environmentId.csv",
+      "name": "Candlepin-API/input_data_files/create_consumers_environmentId.csv",
       "projection": "account as owner",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/environment_id.csv",
+      "name": "Candlepin-API/input_data_files/environment_id.csv",
       "projection": "account as owners",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/export_owners.csv",
+      "name": "Candlepin-API/input_data_files/export_owners.csv",
       "projection": "account as owners",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/events.csv",
+      "name": "Candlepin-API/input_data_files/events.csv",
       "projection": "consumerid as uuid",
       "from": "cp_event",
       "selection": "consumerid is not null",
       "owner_id_column": "ownerid"
     },
     {
-      "name": "Candlepin-API/overrides.csv",
+      "name": "Candlepin-API/input_data_files/overrides.csv",
       "projection": "o.consumer_id as uuid",
       "from": "cp_content_override o, cp_consumer c",
       "selection": "o.consumer_id = c.id",
       "owner_id_column": "c.owner_id"
     },
     {
-      "name": "Candlepin-API/overrides_delete.csv",
+      "name": "Candlepin-API/input_data_files/overrides_delete.csv",
       "projection": "o.consumer_id as uuid_with_overrides, o.content_label as override_label, o.name, o.value",
       "from": "cp_content_override o, cp_consumer c",
       "selection": "o.consumer_id = c.id",
       "owner_id_column": "c.owner_id"
     },
     {
-      "name": "Candlepin-API/update_consumers.csv",
+      "name": "Candlepin-API/input_data_files/update_consumers.csv",
       "projection": "a.uuid as uuid, o.account as owner, a.username, a.servicelevel as serviceLevel, concat(a.lastcheckin, '') as lastCheckin",
       "from": "cp_consumer a, cp_owner o",
       "selection": "servicelevel <> '' and o.id = a.owner_id and lastcheckin is not null",
       "owner_id_column": "o.id"
     },
     {
-      "name": "Candlepin-API/remove_entitlement.csv",
+      "name": "Candlepin-API/input_data_files/remove_entitlement.csv",
       "projection": "ent.id as uuid_with_ent, c.uuid as entitlement_id",
       "from": "cp_entitlement ent, cp_consumer c",
       "selection": "c.id = ent.consumer_id",
       "owner_id_column": "c.owner_id"
     },
     {
-      "name": "Candlepin-API/delete_uuid.csv",
+      "name": "Candlepin-API/input_data_files/delete_uuid.csv",
       "projection": "uuid",
       "from": "cp_consumer",
       "owner_id_column": "owner_id"
     },
     {
-      "name": "Candlepin-API/import.csv",
+      "name": "Candlepin-API/input_data_files/import.csv",
       "projection": "account as owners",
       "from": "cp_owner",
       "owner_id_column": "id"
     },
     {
-      "name": "Candlepin-API/remove_certificate.csv",
+      "name": "Candlepin-API/input_data_files/remove_certificate.csv",
       "projection": "c.uuid as uuid_with_serial, concat(cert.serial_id,'') as serial_id",
       "from": "cp_ent_certificate cert, cp_consumer c, cp_entitlement ent",
       "selection": "c.id = ent.consumer_id and ent.id = cert.entitlement_id",

@@ -77,7 +77,7 @@ def main():
     for csv in csvs:
         file_name = csv['name']
         owner_id_column = csv['owner_id_column']
-        f = open(file_name, 'w')
+        f = open(file_name, 'w+')
         query = "select " + csv['projection'] + ", " + owner_id_column + \
                 " from " + csv['from'] + \
                 " where "

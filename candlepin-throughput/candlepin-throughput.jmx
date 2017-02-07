@@ -1746,7 +1746,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">results.jtl</stringProp>
+        <stringProp name="filename">results-throughput.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>

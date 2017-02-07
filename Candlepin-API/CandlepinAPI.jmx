@@ -9,7 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="file_path" elementType="Argument">
             <stringProp name="Argument.name">file_path</stringProp>
-            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}</stringProp>
+            <stringProp name="Argument.value">${__P(file_path,./input_data_files)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="base_path" elementType="Argument">
@@ -20,11 +20,6 @@
           <elementProp name="import_owner" elementType="Argument">
             <stringProp name="Argument.name">import_owner</stringProp>
             <stringProp name="Argument.value">ImportTestOwner</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="environment_id" elementType="Argument">
-            <stringProp name="Argument.name">environment_id</stringProp>
-            <stringProp name="Argument.value">admin_env</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -46,9 +41,15 @@
             <stringProp name="Argument.desc">Define the server value</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="SCALE" elementType="Argument">
+            <stringProp name="Argument.name">SCALE</stringProp>
+            <stringProp name="Argument.value">${__P(SCALE,1000)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Scale the test</stringProp>
+          </elementProp>
           <elementProp name="MANIFEST.FILE.NAME" elementType="Argument">
             <stringProp name="Argument.name">MANIFEST.FILE.NAME</stringProp>
-            <stringProp name="Argument.value">${__P(MANIFEST_FILE_NAME,ExampleManifest.zip)}</stringProp>
+            <stringProp name="Argument.value">${__P(MANIFEST_FILE_NAME,input_data_files/ExampleManifest.zip)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">Define the manifest file name here</stringProp>
           </elementProp>
@@ -313,7 +314,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${CONSUMER.CREATE.LOOP.COUNT}</stringProp>
+          <stringProp name="LoopController.loops">${__intSum(${CONSUMER.CREATE.LOOP.COUNT},${SCALE},)}</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -386,7 +387,7 @@
           </JSONPostProcessor>
           <hashTree/>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${file_path}create_consumers_activationkey.csv</stringProp>
+            <stringProp name="filename">${file_path}/create_consumers_activationkey.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
@@ -422,7 +423,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${CONSUMER.CREATE.LOOP.COUNT}</stringProp>
+          <stringProp name="LoopController.loops">${__intSum(${CONSUMER.CREATE.LOOP.COUNT},${SCALE},)}</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -447,7 +448,7 @@
         </HeaderManager>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">${file_path}create_consumers_environmentId.csv</stringProp>
+          <stringProp name="filename">${file_path}/create_consumers_environmentId.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames"></stringProp>
           <stringProp name="delimiter">,</stringProp>
@@ -457,14 +458,25 @@
           <stringProp name="shareMode">shareMode.group</stringProp>
         </CSVDataSet>
         <hashTree/>
+        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="script">loc = vars.get(&quot;envid&quot;);
+if(loc == null){
+   vars.put(&quot;envid&quot;,&quot;env&quot; + (int) (Math.random() * 10000000));
+}
+</stringProp>
+        </BeanShellPreProcessor>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Environment CREATE" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;name&quot;: &quot;${owner}_env&quot;,&#xd;
-&quot;id&quot;: &quot;${environment_id}&quot;}</stringProp>
+                <stringProp name="Argument.value">{&quot;name&quot;: &quot;${envid}&quot;,&#xd;
+&quot;id&quot;: &quot;${envid}&quot;}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -498,9 +510,6 @@
     &quot;label&quot;: &quot;system&quot;,&#xd;
     &quot;manifest&quot;: true&#xd;
   },&#xd;
-    &quot;environment&quot;: {&#xd;
-       &quot;id&quot;:&quot;${owner}_env&quot;&#xd;
-    },&#xd;
   &quot;capabilities&quot;: [{&quot;name&quot;:&quot;cert_v3&quot;}],&#xd;
   &quot;facts&quot;: {&quot;system.certificate_version&quot;: &quot;3.5&quot;},&#xd;
   &quot;installedProducts&quot;: [{&#xd;
@@ -520,7 +529,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/consumers?owner=${owner}</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/environments/${envid}/consumers?owner=${owner}</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -567,7 +576,7 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${base_path}/environments/${owner}_env</stringProp>
+          <stringProp name="HTTPSampler.path">${base_path}/environments/${envid}</stringProp>
           <stringProp name="HTTPSampler.method">DELETE</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

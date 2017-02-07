@@ -685,7 +685,7 @@ fstream.close();
             <idleTime>true</idleTime>
           </value>
         </objProp>
-        <stringProp name="filename">${file_path}importexportmaifest_results.csv</stringProp>
+        <stringProp name="filename">results-importexport.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
