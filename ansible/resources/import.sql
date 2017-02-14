@@ -11,3 +11,5 @@ delete from QRTZ_SIMPROP_TRIGGERS;
 delete from QRTZ_TRIGGERS;
 delete from QRTZ_JOB_DETAILS;
 SET FOREIGN_KEY_CHECKS=1;
+update cp_pool set enddate = NOW() + INTERVAL 1 YEAR  where  product_uuid in (  select uuid from cp2_products where product_id = 'MCT3295');
+update cp_pool set enddate = NOW() + INTERVAL 1 YEAR  where  product_uuid in (  select uuid from cp2_products where product_id = 'ES0113909');

@@ -664,7 +664,7 @@ LARGE = 6900 samples/min (115 samples/sec)</stringProp>
         </ThroughputController>
         <hashTree>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/put_consumers_uuid.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
@@ -844,7 +844,7 @@ vars.put(&quot;report&quot;, report);
         </ThroughputController>
         <hashTree>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid.csv</stringProp>
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/consumers_uuid_ents.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
@@ -907,7 +907,7 @@ Note that this will first create a consumer (with an installed product), then bi
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
             <boolProp name="quotedData">true</boolProp>
-            <boolProp name="recycle">true</boolProp>
+            <boolProp name="recycle">false</boolProp>
             <boolProp name="stopThread">false</boolProp>
             <stringProp name="shareMode">shareMode.all</stringProp>
           </CSVDataSet>
@@ -1347,12 +1347,12 @@ This will create a consumer WITH an installed product. This is unlike how subscr
         </ThroughputController>
         <hashTree>
           <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements.csv</stringProp>
+            <stringProp name="filename">${FILE.INPUT_DATA_DIR}/post_consumers_uuid_entitlements2.csv</stringProp>
             <stringProp name="fileEncoding"></stringProp>
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
             <boolProp name="quotedData">true</boolProp>
-            <boolProp name="recycle">true</boolProp>
+            <boolProp name="recycle">false</boolProp>
             <boolProp name="stopThread">false</boolProp>
             <stringProp name="shareMode">shareMode.all</stringProp>
           </CSVDataSet>
@@ -1489,7 +1489,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
             <stringProp name="variableNames"></stringProp>
             <stringProp name="delimiter">,</stringProp>
             <boolProp name="quotedData">true</boolProp>
-            <boolProp name="recycle">true</boolProp>
+            <boolProp name="recycle">false</boolProp>
             <boolProp name="stopThread">false</boolProp>
             <stringProp name="shareMode">shareMode.all</stringProp>
           </CSVDataSet>

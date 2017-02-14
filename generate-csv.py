@@ -89,7 +89,13 @@ def main():
             if i != 0:
                 query += " and "
             query += owner_id_column + " not in (" + ",".join(owner_id_batch) + ")"
-        query += " limit " + str(options.limit)
+        if 'group' in csv:
+            query += ' group by ' + csv['group']
+        if 'limit' in csv:
+            limit = csv['limit']
+        else:
+            limit = str(options.limit)
+        query += " limit " + limit
         print "Writing file : %s ...." % file_name
         cursor.execute(query)
         fields = ','.join([i[0] for i in cursor.description])

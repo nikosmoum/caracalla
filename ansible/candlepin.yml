@@ -8,7 +8,7 @@
   tasks:
     - name: sleep for ddns to kick in
       pause:
-        minutes: 10
+        minutes: 2
   tags:
     - setupvms
 

@@ -1,0 +1,95 @@
+{
+  "csvs": [
+    {
+      "name": "candlepin-throughput/input_data_files/post_consumers_uuid_entitlements_cdk.csv",
+      "projection": "o.account as ownerkey, max(p.id) as poolid, prod.product_id as sku, concat(p.quantity,'') as totalAvailable, '2018-06-20' as expires",
+      "from": "cp_pool p, cp_owner o, cp2_products prod",
+      "selection": "p.owner_id = o.id and  p.product_uuid = prod.uuid and prod.product_id = 'MCT3295' and p.enddate > now()",
+      "owner_id_column": "o.id",
+      "group": "ownerkey",
+      "limit": "100"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/post_consumers_uuid_entitlements2.csv",
+      "projection": "o.account as ownerkey, max(p.id) as poolid, 'ES0113909' as sku, concat(p.quantity,'') as totalAvailable, '2018-06-20' as expires",
+      "from": "cp_pool p, cp_owner o, cp2_products prod",
+      "selection": "p.owner_id = o.id and  p.product_uuid = prod.uuid and prod.product_id = 'ES0113909' and prod.entity_version is null",
+      "owner_id_column": "o.id",
+      "group": "ownerkey",
+      "limit": "40"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/post_consumers_uuid_entitlements.csv",
+      "projection": "o.account as ownerkey, p.id as poolid, prod.product_id as sku, concat(p.quantity,'') as totalAvailable, '2018-06-20' as expires",
+      "from": "cp_pool p, cp_owner o, cp2_products prod",
+      "selection": "p.owner_id = o.id and  p.product_uuid = prod.uuid and prod.product_id = 'ES0113909' and prod.entity_version is null and p.quantity < 0",
+      "owner_id_column": "o.id",
+      "limit": "600"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/consumers_uuid.csv",
+      "projection": "cp.uuid as uuid",
+      "from": "cp_consumer cp",
+      "owner_id_column": "cp.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/consumers_uuid_certs_ser.csv",
+      "projection": "distinct cp.uuid",
+      "from": "cp_consumer cp, cp_entitlement ent",
+      "selection": "cp.id = ent.consumer_id",
+      "owner_id_column": "cp.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/put_consumers_uuid.csv",
+      "projection": "cp.uuid as uuid",
+      "from": "cp_consumer cp",
+      "owner_id_column": "cp.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/hypervisors.csv",
+      "projection": "account as ownerkey, concat((FLOOR( 1 + RAND( ) * 60 )), '') as numVirtHosts, concat((FLOOR( 1 + RAND( ) * 500 )), '') as numVirtGuests",
+      "from": "cp_owner",
+      "owner_id_column": "id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/get_owners_ownerkey_consumers.csv",
+      "projection": "distinct o.account as ownerkey",
+      "from": "cp_owner o, cp_consumer cp",
+      "selection": "o.id = cp.owner_id",
+      "owner_id_column": "cp.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/consumers_uuid_ents.csv",
+      "projection": "distinct cp.uuid",
+      "from": "cp_consumer cp, cp_entitlement ent",
+      "selection": "cp.id = ent.consumer_id",
+      "owner_id_column": "cp.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/consumer_uuids-serials.csv",
+      "projection": "c.uuid as consumer_uuid, concat(cert.serial_id,'') as serials",
+      "from": "cp_consumer c, cp_entitlement ent, cp_ent_certificate cert",
+      "selection": "ent.id = cert.entitlement_id and c.id = ent.consumer_id",
+      "owner_id_column": "c.owner_id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/owners_account_subs.csv",
+      "projection": "account as ownerkey",
+      "from": "cp_owner",
+      "owner_id_column": "id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/owners_account_info.csv",
+      "projection": "account as ownerkey",
+      "from": "cp_owner",
+      "owner_id_column": "id"
+    },
+    {
+      "name": "candlepin-throughput/input_data_files/owners_account_pools.csv",
+      "projection": "distinct o.account",
+      "from": "cp_owner o, cp_pool p",
+      "selection": "o.id = p.owner_id",
+      "owner_id_column": "p.owner_id"
+    }
+  ]
+}
