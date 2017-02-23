@@ -120,7 +120,7 @@ def main():
             output_txt = "Successful compare!"
 
     if options.output is not None:
-        output_file = open(options.output, 'w')
+        output_file = open(options.output, 'w+')
         output_file.write(str(output_txt))
     elif not successful_compare:
         print output_txt

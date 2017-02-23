@@ -129,7 +129,7 @@
     - jmeter-step
 
 - name: Run jmeter test
-  command: /opt/apache-jmeter-3.0/bin/jmeter -n -t "{{caracalla_checkout}}"/{{item.value.test_name}} -p "{{item.value.property_file}}"
+  command: /opt/apache-jmeter-3.0/bin/jmeter -n -t "{{caracalla_checkout}}"/{{item.value.folder}}/{{item.value.test_name}} -p "{{item.value.property_file}}"
   with_dict: "{{jmeter_test_details}}"
   when: "item.key in jmeter_tests"
   args:
@@ -137,14 +137,6 @@
   tags:
     - jmeter-step
     - skip_ansible_lint
-
-#- name: Evaluate result. This is pointless for now till we have a reliable test
-#  command: "./parse-jtl.py -c candlepin-throughput/results.jtl -b candlepin-throughput/baseline.dict -e candlepin-throughput/expected.dict -o output.txt"
-#  args:
-#    chdir: "{{caracalla_checkout}}"
-#    creates: "{{caracalla_checkout}}/output.txt"
-#  tags:
-#    - jmeter-step
 
 - name: Parse result
   command: "./parse-jtl.py --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}}"
@@ -193,3 +185,13 @@
     src: "/var/log/candlepin/access.log"
     dest: "artifacts/access.log"
     flat: yes
+
+- name: Evaluate result
+  command: "./parse-jtl.py -c {{item.value.result_file}} -b {{item.value.folder}}/{{item.value.baseline}} -e {{item.value.folder}}/{{item.value.expected}}"
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
+    - testme

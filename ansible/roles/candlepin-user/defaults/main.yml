@@ -18,23 +18,32 @@ caracalla_branch: master
 # The test to run, other tests defined in jmeter_test_details
 # will be skipped
 jmeter_tests:
- - loop-over-apis
+# - loop-over-apis
  - candlepin-throughput
 
 # The details about all tests, only the ones in jmeter_test will run.
 jmeter_test_details:
   loop-over-apis:
-    test_name: Candlepin-API/CandlepinAPI.jmx
+    folder: Candlepin-API
+    test_name: CandlepinAPI.jmx
+    baseline: baseline.dict
+    expected: expected.dict
     property_file: /home/jenkins/Candlepin-API/CandlepinAPI.prop
     result_file: results-CandlepinAPI.jtl
   ImportExport:
-    test_name: ImportExportManifest/ImportExportManifest.jmx
+    folder: ImportExportManifest
+    test_name: ImportExportManifest.jmx
     property_file: /home/jenkins/ImportExportManifest.prop
     result_file: results-importexport.jtl
+    baseline: baseline.dict
+    expected: expected.dict
   candlepin-throughput:
-    test_name: candlepin-throughput/candlepin-throughput.jmx
+    folder: candlepin-throughput
+    test_name: candlepin-throughput.jmx
     property_file: /home/jenkins/candlepin-throughput/candlepin-throughput.prop
     result_file: results-throughput.jtl
+    baseline: baseline.dict
+    expected: expected.dict
 
 candlepin_throughput_properties:
  - DURATION_SECONDS=3600
