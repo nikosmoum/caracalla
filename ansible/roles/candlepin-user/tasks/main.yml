@@ -5,6 +5,7 @@
     dest: "{{candlepin_checkout}}"
     force: yes
     version: "{{candlepin_branch}}"
+    refspec: '+refs/pull/*:refs/heads/*'
   when: "{{candlepin_git_pull}}"
 
 - name: Checkout Caracalla
