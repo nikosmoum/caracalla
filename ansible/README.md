@@ -13,7 +13,7 @@ The script assumes the following set up is available:
 Note:
  * **Running this test will shutdown all vms on the hypervisors used in the setup**
 
-Example inventory:
+## Example inventory:
 
 ```yaml
 [performance-hypervisors:children]
