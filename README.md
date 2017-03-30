@@ -17,7 +17,7 @@ Currently caracalla houses utilities to performance test candlepin/server.
 
 ### How to add a new test
 
- * Ror each test, we need:
+ * For each test, we need:
    * a new folder for the test's jmx file and all its resources
    * a csv_config.json file which is parsed by generate-csv.py to create csvs for a test against a database
    * a baseline.dict file to track master's perfomance on the same test
