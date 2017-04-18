@@ -1,0 +1,114 @@
+---
+- name: pause for tomcat before restart
+  pause:
+    minutes: 3
+
+- name: Restart tomcat
+  service:
+    name: tomcat
+    state: restarted
+  become: true
+
+- name: pause for tomcat to start
+  pause:
+    minutes: 3
+
+- name: Verify candlepin has started
+  get_url:
+    url: https://localhost:8443/candlepin/status
+    dest: /tmp/status_result.txt
+    validate_certs: no
+    timeout: 360
+
+- name: Write test properties to properties file
+  lineinfile:
+    line: "{{item}}"
+    dest: "{{candlepin_user_home}}/candlepin-throughput/candlepin-throughput.prop"
+  with_items: "{{candlepin_throughput_properties}}"
+
+- name: Remove results file if present
+  file:
+    path: "{{caracalla_checkout}}/{{item.value.result_file}}"
+    state: absent
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Remove parsed results file if present
+  file:
+    path: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
+    state: absent
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Run jmeter test
+  command: "/opt/apache-jmeter-3.0/bin/jmeter -n -t {{caracalla_checkout}}/{{item.value.folder}}/{{item.value.test_name}} -p {{item.value.property_file}}"
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
+    - skip_ansible_lint
+
+- name: Parse result
+  command: "./parse-jtl.py --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}}"
+  args:
+    chdir: "{{caracalla_checkout}}"
+    creates: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Delete existing artifacts folder from workspace
+  local_action: file  dest="artifacts/" state=absent
+
+- name: Create artifacts folder
+  local_action: file  dest="artifacts/" state=directory
+
+- name: Fetch results files
+  fetch:
+    src: "{{caracalla_checkout}}/{{item.value.result_file}}"
+    dest: "artifacts/{{item.value.result_file}}"
+    flat: yes
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Fetch parsed results files
+  fetch:
+    src: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
+    dest: "artifacts/parsed-{{item.value.result_file}}"
+    flat: yes
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Fetch candlepin.log
+  fetch:
+    src: "/var/log/candlepin/candlepin.log"
+    dest: "artifacts/candlepin.log"
+    flat: yes
+
+- name: Fetch access.log
+  fetch:
+    src: "/var/log/candlepin/access.log"
+    dest: "artifacts/access.log"
+    flat: yes
+
+- name: Evaluate result
+  command: "./parse-jtl.py -c {{item.value.result_file}} -b {{item.value.folder}}/{{item.value.baseline}} -e {{item.value.folder}}/{{item.value.expected}}"
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
+    - testme
+

@@ -17,7 +17,7 @@
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0/
   roles:
-    - candlepin-user
+    - { role: candlepin-user, deploy_candlepin: true, provision_db: true, run_test: true }
   vars:
     ansible_user: jenkins
   tags:
