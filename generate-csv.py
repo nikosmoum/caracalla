@@ -1,14 +1,20 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-import logging
-import json
-import MySQLdb
-import psycopg2
-
-from optparse import OptionParser
-
-logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
-logger = logging.getLogger('generate-csv')
+#
+# Copyright (c) 2017 Red Hat, Inc.
+#
+# This software is licensed to you under the GNU General Public License,
+# version 3 (GPLv3). There is NO WARRANTY for this software, express or
+# implied, including the implied warranties of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. You should have received a copy of GPLv3
+# along with this software; if not, see
+# https://www.gnu.org/licenses/gpl-3.0.txt.
+#
+# Red Hat trademarks are not licensed under GPLv3. No permission is
+# granted to use or replicate Red Hat trademarks that are incorporated
+# in this software or its documentation.
+#
 
 '''
 This script is used to create supporting csvs for each jmx test.
@@ -23,39 +29,48 @@ The script requires a config json with an array of csvs where configuration of e
 
 Currently it ensures no overlap in owners between any of the csvs or between any record within a csv.
 '''
-#TODO: add postgre support
+
+import logging
+import json
+import MySQLdb
+import psycopg2
+
+from argparse import ArgumentParser
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
+logger = logging.getLogger('generate-csv')
+
 
 def parse_options():
-    usage = "usage: %prog [options] config_file"
-    parser = OptionParser(usage=usage)
-    parser.add_option("-l", "--limit",
-                      dest="limit",
-                      default=10,
-                      help="the number of rows to return")
-    parser.add_option("--host",
-                      dest="host",
-                      default="localhost",
-                      help="the mysql hostname")
-    parser.add_option("-u", "--username",
-                      dest="username",
-                      default="candlepin",
-                      help="the username for the database")
-    parser.add_option("-p", "--password",
-                      dest="password",
-                      default="",
-                      help="the password for the database user")
-    parser.add_option("-n", "--database-name",
-                      dest="database",
-                      default="candlepin",
-                      help="the database name")
-    parser.add_option("-t", "--database-type",
-                      type="choice",
-                      dest="type",
-                      choices=["mysql","postgres"],
-                      default="mysql",
-                      help="the database type")
+    usage = "%(prog)s [options] config_file"
+    parser = ArgumentParser(usage=usage)
+    parser.add_argument("-l", "--limit",
+                        dest="limit",
+                        default=10,
+                        help="The number of rows to return")
+    parser.add_argument("--host",
+                        dest="host",
+                        default="localhost",
+                        help="The mysql hostname")
+    parser.add_argument("-u", "--username",
+                        dest="username",
+                        default="candlepin",
+                        help="The username for the database")
+    parser.add_argument("-p", "--password",
+                        dest="password",
+                        default="",
+                        help="The password for the database user")
+    parser.add_argument("-n", "--database-name",
+                        dest="database",
+                        default="candlepin",
+                        help="The database name")
+    parser.add_argument("-t", "--database-type",
+                        dest="type",
+                        choices=["mysql","postgres"],
+                        default="mysql",
+                        help="The database type")
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_known_args()
     if len(args) != 1:
         parser.error("You must provide a config file name with sql")
     return (options, args)
@@ -63,8 +78,10 @@ def parse_options():
 def get_connection(options):
     if options.type == 'mysql':
         return MySQLdb.connect(options.host, options.username, options.password, options.database)
-    else:
+    elif options.type == 'postgres':
         return psycopg2.connect(host=options.host, database=options.database, user=options.username, password=options.password)
+    else:
+        raise TypeError('Unsupported database type: %s' % options.type)
 
 def main():
     (options, args) = parse_options()
