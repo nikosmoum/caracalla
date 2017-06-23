@@ -1,0 +1,34 @@
+---
+- name: Shutdown all vms on hypervisors and reset performance vms
+  hosts: performance-hypervisors
+  roles:
+    - hypervisor
+  vars:
+    ansible_user: root
+  tasks:
+    - name: sleep
+      pause:
+        minutes: 4
+
+- name: run liquibase steps
+  hosts: performance-candlepin-vm
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-1.8.0/
+  roles:
+    - { role: candlepin-user, provision_db: true }
+  vars:
+    ansible_user: jenkins
+
+- hosts: performance-hypervisors
+  tasks:
+  - name: shutdown performance vms
+    virt:
+      name: "{{perf_vm_domain}}"
+      command: shutdown
+    register: result
+    failed_when:
+      - "result | failed and 'domain is not running' not in result.msg"
+  - name: delete existing snapshots
+    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap'"
+  - name: create new snapshots
+    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='readyfortestsnap'"

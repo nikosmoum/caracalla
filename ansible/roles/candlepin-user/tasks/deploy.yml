@@ -1,0 +1,52 @@
+---
+- name: Run Bundle install
+  command: /usr/local/bin/bundle install
+  args:
+      chdir: "{{candlepin_checkout}}"
+  tags:
+    - skip_ansible_lint
+
+- name: Add JAVA_HOME to bashrc
+  lineinfile:
+    dest: "{{candlepin_user_home}}/.bashrc"
+    line: "export JAVA_HOME=/usr/lib/jvm/java-1.8.0/"
+
+- name: Check for zshrc
+  stat:
+    path: "{{candlepin_user_home}}/.zshrc"
+  register: zshrc_file
+
+- name: Add JAVA_HOME to zshrc
+  lineinfile:
+    dest: "{{candlepin_user_home}}/.zshrc"
+    line: "export JAVA_HOME=/usr/lib/jvm/java-1.8.0/"
+  when: zshrc_file.stat.exists
+
+- name: Update mysql vm post reset
+  shell: "mysql -h {{mysql_vm_hostname}} -u candlepin candlepin < {{caracalla_checkout}}/ansible/resources/import.sql"
+
+- name: Copy the custom.yaml
+  copy:
+    src: "resources/custom.yaml"
+    dest: "{{candlepin_checkout}}/server/custom.yaml"
+
+- name: Deploy the candlepin server
+  command: "./server/bin/deploy {{candlepin_deploy_args}}"
+  args:
+    chdir: "{{candlepin_checkout}}"
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{candlepin_user_home}}/bin"
+    JAVA_HOME: "/usr/lib/jvm/java-1.8.0/"
+    TERM: "xterm-256color"
+  tags:
+    - candlepin-deploy
+    - skip_ansible_lint
+
+- name: Ensure candlepin talks to appropriate mysql
+  replace:
+    dest: /etc/candlepin/candlepin.conf
+    regexp: 'mysql:///candlepin'
+    replace: 'mysql://{{mysql_vm_hostname}}:3306/candlepin'
+    backup: yes
+  become: true
+

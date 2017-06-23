@@ -1,4 +1,7 @@
 ---
+deploy_candlepin: false
+provision_db: false
+run_test: false
 candlepin_git_pull: True
 
 candlepin_user_home:  /home/jenkins

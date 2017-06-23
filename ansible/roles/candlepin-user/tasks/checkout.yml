@@ -1,0 +1,17 @@
+---
+- name: Checkout Candlepin
+  git:
+    repo: "{{candlepin_git_repo}}"
+    dest: "{{candlepin_checkout}}"
+    force: yes
+    version: "{{candlepin_branch}}"
+    refspec: '+refs/pull/*:refs/heads/*'
+  when: "{{candlepin_git_pull}}"
+
+- name: Checkout Caracalla
+  git:
+    repo: "{{caracalla_git_repo}}"
+    dest: "{{caracalla_checkout}}"
+    force: yes
+    version: "{{caracalla_branch}}"
+  when: "{{candlepin_git_pull}}"

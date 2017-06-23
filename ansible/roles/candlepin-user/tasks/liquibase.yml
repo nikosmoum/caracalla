@@ -1,0 +1,11 @@
+---
+- name: Clear liquibase checksum
+  shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql://{{mysql_vm_hostname}}:3306/candlepin\" --username=candlepin clearChecksums"
+  args:
+    chdir: "{{candlepin_checkout}}"
+
+- name: Update liquibase checksum
+  shell: "liquibase --driver=com.mysql.jdbc.Driver --classpath=server/src/main/resources:server/target/classes/:/usr/share/java/mysql-connector-java.jar --changeLogFile=db/changelog/changelog-update.xml --url=\"jdbc:mysql://{{mysql_vm_hostname}}:3306/candlepin\" --username=candlepin update -Dcommunity=true"
+  args:
+    chdir: "{{candlepin_checkout}}"
+
