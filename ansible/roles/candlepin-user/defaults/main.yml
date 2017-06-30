@@ -33,6 +33,7 @@ jmeter_test_details:
     expected: expected.json
     property_file: /home/jenkins/Candlepin-API/CandlepinAPI.prop
     result_file: results-CandlepinAPI.jtl
+    comparision_result: compare.txt
   ImportExport:
     folder: ImportExportManifest
     test_name: ImportExportManifest.jmx
@@ -40,6 +41,7 @@ jmeter_test_details:
     result_file: results-importexport.jtl
     baseline: baseline.json
     expected: expected.json
+    comparision_result: compare.txt
   candlepin-throughput:
     folder: candlepin-throughput
     test_name: candlepin-throughput.jmx
@@ -47,6 +49,7 @@ jmeter_test_details:
     result_file: results-throughput.jtl
     baseline: baseline.json
     expected: expected.json
+    comparision_result: compare.txt
 
 candlepin_throughput_properties:
  - DURATION_SECONDS=3600

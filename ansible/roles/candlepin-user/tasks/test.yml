@@ -102,8 +102,8 @@
     dest: "artifacts/access.log"
     flat: yes
 
-- name: Evaluate result
-  command: "./parse-jtl.py -c {{item.value.result_file}} -b {{item.value.folder}}/{{item.value.baseline}} -e {{item.value.folder}}/{{item.value.expected}}"
+- name: Compare result
+  command: "./parse-jtl.py -c {{item.value.result_file}} -b {{item.value.folder}}/{{item.value.baseline}} -e {{item.value.folder}}/{{item.value.expected}} -n -o {{item.value.folder}}/{{item.value.comparision_result}}"
   with_dict: "{{jmeter_test_details}}"
   when: "item.key in jmeter_tests"
   args:
@@ -112,3 +112,40 @@
     - jmeter-step
     - testme
 
+- name: Show passed tests
+  shell: 'grep "\[OK\]" {{item.value.folder}}/{{item.value.comparision_result}} || true'
+  register: passed_tests_dict
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
+
+- debug:
+    msg: "{{item.stdout_lines}}"
+  when: item.changed == true
+  with_items: "{{passed_tests_dict.results}}"
+
+- name: Show failed tests
+  shell: 'grep "\[FAILED\]" {{item.value.folder}}/{{item.value.comparision_result}} || true'
+  register: failed_tests_dict
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
+
+- debug:
+    msg: "{{item.stdout_lines}}"
+  when: item.changed == true
+  with_items: "{{failed_tests_dict.results}}"
+
+- name: Check for failed tests
+  shell: '! grep "\[FAILED\]" {{item.value.folder}}/{{item.value.comparision_result}}'
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step
