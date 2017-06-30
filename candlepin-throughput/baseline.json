@@ -1,142 +1,142 @@
 {
-  "GET status": {
-    "count": 21618, 
-    "success_%": 100, 
-    "average": 15, 
-    "success": 21618, 
-    "elapsed": 345078
-  }, 
-  "GET consumers/{uuid}/certificates/serials": {
-    "count": 16028, 
-    "success_%": 100, 
-    "average": 558, 
-    "success": 16028, 
-    "elapsed": 8953523
-  }, 
-  "GET consumers/{uuid}/entitlements?{params}": {
-    "count": 434, 
-    "success_%": 100, 
-    "average": 680, 
-    "success": 434, 
-    "elapsed": 295532
-  }, 
-  "PUT consumers/{uuid}": {
-    "count": 1833, 
-    "success_%": 100, 
-    "average": 650, 
-    "success": 1833, 
-    "elapsed": 1191599
-  }, 
-  "GET consumers/{uuid}/compliance": {
-    "count": 6671, 
-    "success_%": 100, 
-    "average": 485, 
-    "success": 6671, 
-    "elapsed": 3237020
-  }, 
-  "GET consumers/{uuid}/content_overrides": {
-    "count": 10889, 
-    "success_%": 100, 
-    "average": 343, 
-    "success": 10889, 
-    "elapsed": 3743479
-  }, 
-  "POST consumers/{uuid}/entitlements (CDK)": {
-    "count": 42, 
-    "success_%": 100, 
-    "average": 1751, 
-    "success": 42, 
-    "elapsed": 73573
-  }, 
-  "GET owners/{ownerkey}/info": {
-    "count": 101, 
-    "success_%": 100, 
-    "average": 2857, 
-    "success": 101, 
-    "elapsed": 288627
-  }, 
-  "GET owners/{ownerkey}/consumers": {
-    "count": 593, 
-    "success_%": 100, 
-    "average": 536, 
-    "success": 593, 
-    "elapsed": 317940
-  }, 
-  "POST hypervisors?owner={ownerkey}": {
-    "count": 2197, 
-    "success_%": 99, 
-    "average": 28295, 
-    "success": 2188, 
-    "elapsed": 62165158
-  }, 
-  "GET consumers/{uuid}/owner": {
-    "count": 2629, 
-    "success_%": 100, 
-    "average": 468, 
-    "success": 2629, 
-    "elapsed": 1231833
-  }, 
   "DELETE consumers/{uuid} (post-bind)": {
-    "count": 452, 
-    "success_%": 100, 
-    "average": 621, 
-    "success": 452, 
-    "elapsed": 280931
-  }, 
-  "GET consumers/{uuid}/certificates?{params}": {
-    "count": 97, 
-    "success_%": 98, 
-    "average": 580, 
-    "success": 96, 
-    "elapsed": 56331
-  }, 
-  "POST consumers/{uuid}/entitlements": {
-    "count": 30, 
-    "success_%": 100, 
-    "average": 1355, 
-    "success": 30, 
-    "elapsed": 40654
-  }, 
-  "PUT owners/{ownerkey}/subscriptions": {
-    "count": 46, 
-    "success_%": 100, 
-    "average": 669, 
-    "success": 46, 
-    "elapsed": 30776
+    "average": 4792,
+    "count": 369,
+    "elapsed": 1768324,
+    "success": 314,
+    "success_%": 85
   }, 
   "GET consumers/{uuid}": {
-    "count": 16117, 
-    "success_%": 100, 
-    "average": 513, 
-    "success": 16117, 
-    "elapsed": 8269215
+    "average": 866,
+    "count": 13165,
+    "elapsed": 11401970,
+    "success": 13165,
+    "success_%": 100
   }, 
-  "POST consumers/{uuid}/entitlements?{params}": {
-    "count": 380, 
-    "success_%": 100, 
-    "average": 1176, 
-    "success": 380, 
-    "elapsed": 447098
+  "GET consumers/{uuid}/certificates/serials": {
+    "average": 921,
+    "count": 13091,
+    "elapsed": 12069765,
+    "success": 13091,
+    "success_%": 100
   }, 
-  "POST consumers?owner={ownerkey} (pre-bind)": {
-    "count": 453, 
-    "success_%": 100, 
-    "average": 7190, 
-    "success": 453, 
-    "elapsed": 3257481
+  "GET consumers/{uuid}/certificates?{params}": {
+    "average": 929,
+    "count": 79,
+    "elapsed": 73459,
+    "success": 79,
+    "success_%": 100
+  }, 
+  "GET consumers/{uuid}/compliance": {
+    "average": 855,
+    "count": 5448,
+    "elapsed": 4659017,
+    "success": 5448,
+    "success_%": 100
+  }, 
+  "GET consumers/{uuid}/content_overrides": {
+    "average": 139,
+    "count": 8893,
+    "elapsed": 1243758,
+    "success": 8893,
+    "success_%": 100
+  }, 
+  "GET consumers/{uuid}/entitlements?{params}": {
+    "average": 1025,
+    "count": 354,
+    "elapsed": 363024,
+    "success": 354,
+    "success_%": 100
+  }, 
+  "GET consumers/{uuid}/owner": {
+    "average": 820,
+    "count": 2148,
+    "elapsed": 1762609,
+    "success": 2148,
+    "success_%": 100
   }, 
   "GET consumers/{uuid}/release": {
-    "count": 20486, 
-    "success_%": 100, 
-    "average": 470, 
-    "success": 20486, 
-    "elapsed": 9633177
+    "average": 833,
+    "count": 16733,
+    "elapsed": 13942988,
+    "success": 16733,
+    "success_%": 100
+  }, 
+  "GET owners/{ownerkey}/consumers": {
+    "average": 799,
+    "count": 485,
+    "elapsed": 387663,
+    "success": 485,
+    "success_%": 100
   }, 
   "GET owners/{ownerkey}/consumers?{params}": {
-    "count": 81, 
-    "success_%": 100, 
-    "average": 688, 
-    "success": 81, 
-    "elapsed": 55759
+    "average": 631,
+    "count": 66,
+    "elapsed": 41672,
+    "success": 66,
+    "success_%": 100
+  }, 
+  "GET owners/{ownerkey}/info": {
+    "average": 1743,
+    "count": 83,
+    "elapsed": 144669,
+    "success": 83,
+    "success_%": 100
+  }, 
+  "GET status": {
+    "average": 10,
+    "count": 17655,
+    "elapsed": 185688,
+    "success": 17655,
+    "success_%": 100
+  }, 
+  "POST consumers/{uuid}/entitlements": {
+    "average": 2511,
+    "count": 25,
+    "elapsed": 62785,
+    "success": 25,
+    "success_%": 100
+  }, 
+  "POST consumers/{uuid}/entitlements (CDK)": {
+    "average": 2052,
+    "count": 34,
+    "elapsed": 69780,
+    "success": 34,
+    "success_%": 100
+  }, 
+  "POST consumers/{uuid}/entitlements?{params}": {
+    "average": 1791,
+    "count": 310,
+    "elapsed": 555347,
+    "success": 310,
+    "success_%": 100
+  }, 
+  "POST consumers?owner={ownerkey} (pre-bind)": {
+    "average": 6414,
+    "count": 370,
+    "elapsed": 2373342,
+    "success": 370,
+    "success_%": 100
+  }, 
+  "POST hypervisors?owner={ownerkey}": {
+    "average": 28548,
+    "count": 1795,
+    "elapsed": 51244660,
+    "success": 1752,
+    "success_%": 97
+  }, 
+  "PUT consumers/{uuid}": {
+    "average": 1028,
+    "count": 1497,
+    "elapsed": 1539217,
+    "success": 1497,
+    "success_%": 100
+  },
+  "PUT owners/{ownerkey}/subscriptions": {
+    "average": 922,
+    "count": 38,
+    "elapsed": 35055,
+    "success": 38,
+    "success_%": 100
   }
 }
