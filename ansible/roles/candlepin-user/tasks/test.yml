@@ -125,7 +125,7 @@
 - name: Set variable with passed tests
   set_fact: failed_tests="{{item.stdout_lines}}"
   when: "item.key in jmeter_tests"
-  with_dict: "{{passed_tests_dict.results}}"
+  with_items: "{{passed_tests_dict.results}}"
 
 - name: Show passed tests
   debug:
@@ -144,7 +144,7 @@
 - name: Set variable with failed tests
   set_fact: failed_tests="{{item.stdout_lines}}"
   when: "item.key in jmeter_tests"
-  with_dict: "{{failed_tests_dict.results}}"
+  with_items: "{{failed_tests_dict.results}}"
 
 - name: Show failed tests
   debug:
