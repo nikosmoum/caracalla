@@ -123,8 +123,8 @@
     - jmeter-step
 
 - name: Set variable with passed tests
-  set_fact: failed_tests="{{item.stdout_lines}}"
-  when: "item.key in jmeter_tests"
+  set_fact: passed_tests="{{item.stdout_lines}}"
+  when: item.changed == true
   with_items: "{{passed_tests_dict.results}}"
 
 - name: Show passed tests
@@ -143,7 +143,7 @@
 
 - name: Set variable with failed tests
   set_fact: failed_tests="{{item.stdout_lines}}"
-  when: "item.key in jmeter_tests"
+  when: item.changed == true
   with_items: "{{failed_tests_dict.results}}"
 
 - name: Show failed tests
