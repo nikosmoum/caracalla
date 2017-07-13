@@ -17,8 +17,10 @@
 #
 
 """
-This script is used for computing deviance of performance results
-from several existing results.
+This script is used for estimating deviance and baseline of performance
+results from several existing results. Computed values are stored in
+configuration files. These values are used as parameters in next
+performance tests.
 """
 
 from __future__ import print_function

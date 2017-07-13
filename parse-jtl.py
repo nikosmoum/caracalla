@@ -25,7 +25,6 @@ from __future__ import print_function
 import logging
 import csv
 import json
-import sys
 
 from argparse import ArgumentParser
 
@@ -101,8 +100,8 @@ def compare_success_rates(api_call, current_success_rate, required_success_rate)
     :return: Error message, when current success rate is too low
     """
     if current_success_rate < required_success_rate:
-        return "API call: '%s': success rate: %s, expected: %s [FAILED]\n" \
-            % (api_call, current_success_rate, required_success_rate)
+        return "API call: %s [FAILED] success rate: %s%%, expected: %4.1f%%\n" \
+            % (api_call.ljust(50, '.'), current_success_rate, required_success_rate)
     return ""
 
 
@@ -115,9 +114,10 @@ def compare_elapsed_times(api_call, current_elapsed_time, baseline_elapsed_time,
         baseline_elapsed_time = 1
     deviance = ((current_elapsed_time - baseline_elapsed_time) * 100) / baseline_elapsed_time
     if deviance > allowed_deviance:
-        return "API call: '%s': current average: %s, base line average: %s, " \
-            "deviance: %s, allowed deviance: %s [FAILED]\n" \
-            % (api_call, current_elapsed_time, baseline_elapsed_time, deviance, allowed_deviance)
+        return "API call: %s [FAILED] current avg: %sms, base line avg: %sms, " \
+            "dev: %s%%, allowed dev: %4.1f%%\n" \
+            % (api_call.ljust(50, '.'), current_elapsed_time,
+               baseline_elapsed_time, deviance, allowed_deviance)
     return ""
 
 
@@ -150,7 +150,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
             failures += 1
         # When everything is OK, then add current API call to output
         if succ_rate == "" and elap_time == "":
-            info = "API call: '%s' [OK]\n" % key
+            info = "API call: %s [OK]\n" % key.ljust(50, '.')
             if Colors.NO_COLOR is False:
                 result += Colors.BLUE + info + Colors.ENDC
             else:
@@ -209,7 +209,6 @@ def main():
 
         # When current results are in limits, then output_txt is empty string
         if failures == 0:
-            successful_compare = True
             print('All results in file: %s are in limits of allowed deviations.' % input_file)
     else:
         return

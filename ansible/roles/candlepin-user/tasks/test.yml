@@ -112,6 +112,14 @@
     - jmeter-step
     - testme
 
+- name: Fetch compare.txt
+  fetch:
+    src: "{{item.value.folder}}/{{item.value.comparision_result}}"
+    dest: "artifacts/{{item.value.folder}}-{{item.value.comparision_result}}"
+    flat: yes
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+
 - name: Grep passed tests
   shell: 'grep "\[OK\]" {{item.value.folder}}/{{item.value.comparision_result}} || true'
   register: passed_tests_dict
