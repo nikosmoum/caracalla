@@ -135,10 +135,6 @@
   when: item.changed == true
   with_items: "{{passed_tests_dict.results}}"
 
-- name: Show passed tests
-  debug:
-    msg: "{{passed_tests}}"
-
 - name: Grep failed tests from results
   shell: 'grep "\[FAILED\]" {{item.value.folder}}/{{item.value.comparision_result}} || true'
   register: failed_tests_dict
@@ -153,6 +149,10 @@
   set_fact: failed_tests="{{item.stdout_lines}}"
   when: item.changed == true
   with_items: "{{failed_tests_dict.results}}"
+
+- name: Show passed tests
+  debug:
+    msg: "{{passed_tests}}"
 
 - name: Show failed tests
   debug:
