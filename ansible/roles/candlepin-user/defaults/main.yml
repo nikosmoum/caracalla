@@ -54,3 +54,7 @@ jmeter_test_details:
 candlepin_throughput_properties:
  - DURATION_SECONDS=3600
  - SAMPLES_PER_MINUTE=6900
+
+database_snapshot:
+ - master
+# - candlepin-2.0-HOTFIX
