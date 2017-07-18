@@ -153,10 +153,12 @@
 - name: Show passed tests
   debug:
     msg: "{{passed_tests}}"
+  when: passed_tests != []
 
 - name: Show failed tests
   debug:
     msg: "{{failed_tests}}"
+  when: failed_tests != []
 
 - name: Check for failed tests
   shell: '! grep "\[FAILED\]" {{item.value.folder}}/{{item.value.comparision_result}} > /dev/null'
