@@ -63,7 +63,7 @@ class Estimator(object):
                 self.perf_test_results[filename] = perf_test_result
                 # print('Loading file: %s [DONE]' % filename)
 
-    def _read_resutls(self):
+    def _read_results(self):
         """
         Try to load all json files with performance tests from directory
         :return: None
@@ -179,7 +179,7 @@ class Estimator(object):
         Perform all necessary action to estimate new expected deviations
         :return: None
         """
-        self._read_resutls()
+        self._read_results()
         self._estimate()
         self._write_results()
 
