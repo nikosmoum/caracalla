@@ -45,7 +45,7 @@
 - name: Ensure candlepin talks to appropriate mysql
   replace:
     dest: /etc/candlepin/candlepin.conf
-    regexp: 'mysql:///candlepin'
+    regexp: 'mysql://localhost/candlepin'
     replace: 'mysql://{{mysql_vm_hostname}}:3306/candlepin'
     backup: yes
   become: true
