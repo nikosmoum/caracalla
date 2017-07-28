@@ -67,7 +67,7 @@ def parse_options():
                         help="Success criteria dictionary, only used with -c")
     parser.add_argument("-b", "--baseline", default=None,
                         dest="baseline",
-                        help="Dictionary to compare with, only used with -c")
+                        help="Dictionary to compare with, only used with -c and --pretty-print")
     parser.add_argument("-n", "--no-colors", default=False,
                         dest="no_colors", action="store_true",
                         help="Bypass using colors in output")
@@ -133,7 +133,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
                     )
         if succ_rate != "":
             if Colors.NO_COLOR is False:
-                succ_rate = Colors.YELLOW + succ_rate + Colors.ENDC
+                succ_rate = Colors.MAGENTA + succ_rate + Colors.ENDC
             result += succ_rate
             failures += 1
         # Check elapsed time
@@ -152,7 +152,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
         if succ_rate == "" and elap_time == "":
             info = "API call: %s [OK]\n" % key.ljust(50, '.')
             if Colors.NO_COLOR is False:
-                result += Colors.BLUE + info + Colors.ENDC
+                result += Colors.GREEN + Colors.BOLD + info + Colors.ENDC
             else:
                 result += info
     return result, failures
