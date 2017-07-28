@@ -67,7 +67,7 @@ def parse_options():
                         help="Success criteria dictionary, only used with -c")
     parser.add_argument("-b", "--baseline", default=None,
                         dest="baseline",
-                        help="Dictionary to compare with, only used with -c")
+                        help="Dictionary to compare with, only used with -c and --pretty-print")
     parser.add_argument("-n", "--no-colors", default=False,
                         dest="no_colors", action="store_true",
                         help="Bypass using colors in output")
@@ -133,7 +133,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
                     )
         if succ_rate != "":
             if Colors.NO_COLOR is False:
-                succ_rate = Colors.YELLOW + succ_rate + Colors.ENDC
+                succ_rate = Colors.MAGENTA + succ_rate + Colors.ENDC
             result += succ_rate
             failures += 1
         # Check elapsed time
@@ -152,7 +152,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
         if succ_rate == "" and elap_time == "":
             info = "API call: %s [OK]\n" % key.ljust(50, '.')
             if Colors.NO_COLOR is False:
-                result += Colors.BLUE + info + Colors.ENDC
+                result += Colors.GREEN + Colors.BOLD + info + Colors.ENDC
             else:
                 result += info
     return result, failures
@@ -186,23 +186,44 @@ def main():
     input_file = args[0]
     logger.debug("Opening %s" % input_file)
     current_results = parse_csv(input_file)
-    successful_compare = False
+
+    # Load file with baseline results
+    if options.baseline:
+        with open(options.baseline, 'r') as baseline_file:
+            baseline_data = json.load(baseline_file)
+
+    if options.expected:
+        # Load file with expected success rates for all performance tests
+        with open(options.expected, 'r') as expected_success_rate_file:
+            expected_success_rate = json.load(expected_success_rate_file)
 
     if options.parse:
         output_txt = json.dumps(current_results, sort_keys=True, indent=2)
     elif options.pretty_print:
-        output_txt = "success %, average time elapsed, API\n"
+        if options.baseline:
+            output_txt = "success % (baseline %), average time elapsed (baseline), API\n"
+        else:
+            output_txt = "success %, average time elapsed, API\n"
         for key, result in sorted(current_results.items()):
-            output_txt += "{0}%, {1}us, {2} \n".format(result["success_%"], result["average"], key)
+            if options.baseline:
+                try:
+                    base_result = baseline_data[key]
+                except KeyError:
+                    base_result = {"success_%": "??", "average": "??"}
+                output_txt += "{0}% ({1}%), {2}ms ({3}ms), {4} \n".format(
+                    result["success_%"],
+                    base_result["success_%"],
+                    result["average"],
+                    base_result["average"],
+                    key
+                )
+            else:
+                output_txt += "{0}%, {1}ms, {2} \n".format(
+                    result["success_%"],
+                    result["average"],
+                    key
+                )
     elif options.compare:
-
-        # Load file with baseline results
-        with open(options.baseline, 'r') as baseline_file:
-            baseline_data = json.load(baseline_file)
-
-        # Load file with expected success rates for all performance tests
-        with open(options.expected, 'r') as expected_success_rate_file:
-            expected_success_rate = json.load(expected_success_rate_file)
 
         # Compare current results with baseline results
         output_txt, failures = compare_csv(current_results, baseline_data, expected_success_rate)
