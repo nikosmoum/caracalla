@@ -12,6 +12,7 @@
     force: yes
     version: "{{candlepin_branch}}"
     refspec: "+refs/pull/*:refs/remotes/origin/pr/*"
+    clone: yes
   when: candlepin_git_pull == True
 
 - name: Checkout Caracalla
