@@ -1,4 +1,10 @@
 ---
+- name: Clean Candlepin Checkout
+  file:
+      state: absent
+      path: "{{candlepin_checkout}}"
+  when: candlepin_git_pull == True
+
 - name: Checkout Candlepin
   git:
     repo: "{{candlepin_git_repo}}"
