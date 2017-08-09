@@ -1,11 +1,18 @@
 ---
+- name: Clean Candlepin Checkout
+  file:
+      state: absent
+      path: "{{candlepin_checkout}}"
+  when: candlepin_git_pull == True
+
 - name: Checkout Candlepin
   git:
     repo: "{{candlepin_git_repo}}"
     dest: "{{candlepin_checkout}}"
     force: yes
     version: "{{candlepin_branch}}"
-#    refspec: '+refs/pull/*:refs/heads/*'
+    refspec: "+refs/pull/*:refs/remotes/origin/pr/*"
+    clone: yes
   when: candlepin_git_pull == True
 
 - name: Checkout Caracalla
