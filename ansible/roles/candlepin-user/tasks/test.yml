@@ -95,12 +95,14 @@
     src: "/var/log/candlepin/candlepin.log"
     dest: "artifacts/candlepin.log"
     flat: yes
+  when: keep_logs
 
 - name: Fetch access.log
   fetch:
     src: "/var/log/candlepin/access.log"
     dest: "artifacts/access.log"
     flat: yes
+  when: keep_logs
 
 - name: Compare results
   command: "./parse-jtl.py -c {{item.value.result_file}} -b {{item.value.folder}}/{{item.value.baseline}} -e {{item.value.folder}}/{{item.value.expected}} -n -o {{item.value.folder}}/{{item.value.comparision_result}}"
