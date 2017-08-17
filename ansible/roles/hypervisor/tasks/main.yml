@@ -13,6 +13,8 @@
   command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap' --running
   when:
     - perf_vm_domain == "CP" or (perf_vm_domain == "candlepin-perf-mysql" and target_branch == "master")
+      or (perf_vm_domain == "candlepin-perf-mysql"
+      and (target_branch != "candlepin-2.0-HOTFIX" and target_branch != "candlepin-2.1-HOTFIX" ))
   tags:
     - skip_ansible_lint
 
@@ -21,5 +23,13 @@
   when:
     - perf_vm_domain == "candlepin-perf-mysql"
     - target_branch == "candlepin-2.0-HOTFIX"
+  tags:
+    - skip_ansible_lint
+
+- name: Reset snapshot on performance vm (candlepin-2.1-HOTFIX snapshot)
+  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='candlepin_21_hotfix' --running
+  when:
+    - perf_vm_domain == "candlepin-perf-mysql"
+    - target_branch == "candlepin-2.1-HOTFIX"
   tags:
     - skip_ansible_lint

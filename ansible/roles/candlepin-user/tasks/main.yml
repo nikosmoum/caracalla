@@ -1,4 +1,10 @@
 ---
+- name: setting baseline branch variable
+  set_fact:
+      baseline_branch: "{{target_branch}}"
+  when:
+      - target_branch == "candlepin-2.0-HOTFIX" or target_branch == "candlepin-2.1-HOTFIX"
+
 - include: checkout.yml
 
 - include: deploy.yml
