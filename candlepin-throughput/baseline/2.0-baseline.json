@@ -5,126 +5,126 @@
     "elapsed": 1768324,
     "success": 314,
     "success_%": 85
-  }, 
+  },
   "GET consumers/{uuid}": {
     "average": 866,
     "count": 13165,
     "elapsed": 11401970,
     "success": 13165,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/certificates/serials": {
     "average": 921,
     "count": 13091,
     "elapsed": 12069765,
     "success": 13091,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/certificates?{params}": {
     "average": 929,
     "count": 79,
     "elapsed": 73459,
     "success": 79,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/compliance": {
     "average": 855,
     "count": 5448,
     "elapsed": 4659017,
     "success": 5448,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/content_overrides": {
     "average": 139,
     "count": 8893,
     "elapsed": 1243758,
     "success": 8893,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/entitlements?{params}": {
     "average": 1025,
     "count": 354,
     "elapsed": 363024,
     "success": 354,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/owner": {
     "average": 820,
     "count": 2148,
     "elapsed": 1762609,
     "success": 2148,
     "success_%": 100
-  }, 
+  },
   "GET consumers/{uuid}/release": {
     "average": 833,
     "count": 16733,
     "elapsed": 13942988,
     "success": 16733,
     "success_%": 100
-  }, 
+  },
   "GET owners/{ownerkey}/consumers": {
     "average": 799,
     "count": 485,
     "elapsed": 387663,
     "success": 485,
     "success_%": 100
-  }, 
+  },
   "GET owners/{ownerkey}/consumers?{params}": {
     "average": 631,
     "count": 66,
     "elapsed": 41672,
     "success": 66,
     "success_%": 100
-  }, 
+  },
   "GET owners/{ownerkey}/info": {
     "average": 1743,
     "count": 83,
     "elapsed": 144669,
     "success": 83,
     "success_%": 100
-  }, 
+  },
   "GET status": {
     "average": 10,
     "count": 17655,
     "elapsed": 185688,
     "success": 17655,
     "success_%": 100
-  }, 
+  },
   "POST consumers/{uuid}/entitlements": {
     "average": 2511,
     "count": 25,
     "elapsed": 62785,
     "success": 25,
     "success_%": 100
-  }, 
+  },
   "POST consumers/{uuid}/entitlements (CDK)": {
     "average": 2052,
     "count": 34,
     "elapsed": 69780,
     "success": 34,
     "success_%": 100
-  }, 
+  },
   "POST consumers/{uuid}/entitlements?{params}": {
     "average": 1791,
     "count": 310,
     "elapsed": 555347,
     "success": 310,
     "success_%": 100
-  }, 
+  },
   "POST consumers?owner={ownerkey} (pre-bind)": {
     "average": 6414,
     "count": 370,
     "elapsed": 2373342,
     "success": 370,
     "success_%": 100
-  }, 
+  },
   "POST hypervisors?owner={ownerkey}": {
     "average": 28548,
     "count": 1795,
     "elapsed": 51244660,
     "success": 1752,
     "success_%": 97
-  }, 
+  },
   "PUT consumers/{uuid}": {
     "average": 1028,
     "count": 1497,

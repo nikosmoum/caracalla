@@ -1,0 +1,21 @@
+---
+deploy_candlepin: false
+provision_db: false
+run_test: false
+keep_logs: false
+candlepin_git_pull: True
+
+candlepin_user_home:  /home/jenkins
+
+candlepin_git_repo: https://github.com/candlepin/candlepin.git
+candlepin_checkout: /home/jenkins/candlepin
+candlepin_branch: master
+baseline_branch: master
+
+# feel free to change arguments but keep in mind
+# the test is meant to work with mysql, so requires -m
+candlepin_deploy_args: "-maH"
+
+caracalla_git_repo: https://github.com/candlepin/caracalla.git
+caracalla_checkout: /home/jenkins/caracalla
+caracalla_branch: master

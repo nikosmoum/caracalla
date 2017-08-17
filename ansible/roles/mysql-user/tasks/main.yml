@@ -4,6 +4,8 @@
     src: "resources/my.cnf"
     dest: "/etc/my.cnf"
   become: true
+  retries: 10
+  delay: 5
 
 - name: Restart mariadb
   service:

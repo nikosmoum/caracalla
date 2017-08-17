@@ -1,5 +1,6 @@
 candlepin.conf:
+  pinsetter_enabled: "false"
+  custom_logging:
+    "#org.candlepin": "DEBUG"
   additional_properties: |
-    candlepin.pinsetter.enable=false
     pinsetter.default_tasks=
-    #log4j.logger.org.candlepin=DEBUG

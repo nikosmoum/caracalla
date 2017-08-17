@@ -1,0 +1,42 @@
+---
+- name: Clean Candlepin Checkout
+  file:
+      state: absent
+      path: "{{candlepin_checkout}}"
+  when: candlepin_git_pull == True
+
+- name: Checkout Candlepin
+  git:
+    repo: "{{candlepin_git_repo}}"
+    dest: "{{candlepin_checkout}}"
+    force: yes
+    version: "{{candlepin_branch}}"
+    refspec: "+refs/pull/*:refs/remotes/origin/pr/*"
+    clone: yes
+  when: candlepin_git_pull == True
+
+- name: Checkout Caracalla
+  git:
+    repo: "{{caracalla_git_repo}}"
+    dest: "{{caracalla_checkout}}"
+    force: yes
+    version: "{{caracalla_branch}}"
+  when: candlepin_git_pull == True
+
+- name: get contents of candlepin.spec
+  shell:
+          "cat {{candlepin_checkout}}/server/candlepin.spec.tmpl | grep 'Version: ' | awk '{print $2}'"
+  register: version_output
+  tags:
+        - version-check
+
+- name: Set version fact
+  set_fact:
+        baseline_branch: "{{version_output.stdout}}"
+  tags:
+        - version-check
+
+- debug:
+        msg: "Candlepin baseline version is {{baseline_branch}}"
+  tags:
+        - version-check
