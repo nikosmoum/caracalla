@@ -53,5 +53,5 @@ jmeter_test_details:
     comparision_result: compare.txt
 
 candlepin_throughput_properties:
- - DURATION_SECONDS=3600
+ - DURATION_SECONDS=600
  - SAMPLES_PER_MINUTE=6900
