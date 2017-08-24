@@ -95,6 +95,7 @@
     src: "/var/log/candlepin/candlepin.log"
     dest: "artifacts/candlepin.log"
     flat: yes
+    validate_checksum: no
   when: keep_logs
 
 - name: Fetch access.log
@@ -102,6 +103,7 @@
     src: "/var/log/candlepin/access.log"
     dest: "artifacts/access.log"
     flat: yes
+    validate_checksum: no
   when: keep_logs
 
 - name: Compare results
