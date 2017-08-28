@@ -12,6 +12,15 @@
   tags:
     - setupvms
 
+- name: Setup mysql vm
+  hosts: performance-mysql-vm
+  roles:
+    - mysql-user
+  vars:
+    ansible_user: root
+  tags:
+    - runtest
+
 - name: Deploy candlepin and run performance test
   hosts: performance-candlepin-vm
   environment:
