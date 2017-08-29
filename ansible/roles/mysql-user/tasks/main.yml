@@ -1,0 +1,12 @@
+---
+- name: Copy the my.cnf
+  copy:
+    src: "resources/my.cnf"
+    dest: "/etc/my.cnf"
+  become: true
+
+- name: Restart mariadb
+  service:
+    name: mariadb
+    state: restarted
+  become: true

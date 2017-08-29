@@ -114,7 +114,6 @@
     chdir: "{{caracalla_checkout}}"
   tags:
     - jmeter-step
-    - testme
 
 - name: Fetch compare.txt
   fetch:
