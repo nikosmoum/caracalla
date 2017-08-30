@@ -129,8 +129,7 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
         succ_rate = compare_success_rates(
                         key,
                         values['success_%'],
-                        99.0
-                        #deviance_dict[key]['required_success']
+                        95.0
                     )
         if succ_rate != "":
             if Colors.NO_COLOR is False:

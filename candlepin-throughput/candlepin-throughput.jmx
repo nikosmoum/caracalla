@@ -1335,7 +1335,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           <stringProp name="ThroughputController.percentThroughput">${THROUGHPUT.GET_USERS_USER_OWNERS}</stringProp>
         </ThroughputController>
         <hashTree/>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -1470,7 +1470,7 @@ This will create a consumer WITH an installed product. This is unlike how subscr
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
-        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="true">
+        <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="POST consumers/{uuid}/entitlements (CDK)" enabled="false">
           <intProp name="ThroughputController.style">1</intProp>
           <boolProp name="ThroughputController.perThread">false</boolProp>
           <intProp name="ThroughputController.maxThroughput">1</intProp>
