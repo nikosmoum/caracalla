@@ -48,6 +48,10 @@ def parse_options():
                         dest="limit",
                         default=10,
                         help="The number of rows to return")
+    parser.add_argument("--repeat-owners",
+                        dest="repeat",
+                        action="store_true",
+                        help="Allow non-unique owners per csv, per record")
     parser.add_argument("--host",
                         dest="host",
                         default="localhost",
@@ -100,8 +104,11 @@ def main():
                 " where "
         if 'selection' in csv:
             query += csv['selection'] + " and "
-        # split up owner ids into batches of 999
-        owner_id_batches = [owner_ids[i:i + 999] for i in xrange(0, len(owner_ids), 999)]
+        if options.repeat:
+            owner_id_batches = [["'0'"]]
+        else:
+            # split up owner ids into batches of 999
+            owner_id_batches = [owner_ids[i:i + 999] for i in xrange(0, len(owner_ids), 999)]
         for i, owner_id_batch in enumerate(owner_id_batches):
             if i != 0:
                 query += " and "
