@@ -1,0 +1,44 @@
+{
+  "Activation key consumer CREATE": {
+    "average": 495, 
+    "count": 1001, 
+    "elapsed": 496493, 
+    "success": 1001, 
+    "success_%": 100
+  }, 
+  "Activation key consumer DELETE": {
+    "average": 134, 
+    "count": 1001, 
+    "elapsed": 134671, 
+    "success": 1001, 
+    "success_%": 100
+  }, 
+  "Environment CREATE": {
+    "average": 51, 
+    "count": 1001, 
+    "elapsed": 51840, 
+    "success": 1001, 
+    "success_%": 100
+  }, 
+  "Environment DELETE": {
+    "average": 59, 
+    "count": 1001, 
+    "elapsed": 59070, 
+    "success": 1001, 
+    "success_%": 100
+  }, 
+  "Environment consumer CREATE": {
+    "average": 451, 
+    "count": 1001, 
+    "elapsed": 451962, 
+    "success": 1001, 
+    "success_%": 100
+  }, 
+  "Environment consumer DELETE": {
+    "average": 106, 
+    "count": 1001, 
+    "elapsed": 106572, 
+    "success": 1001, 
+    "success_%": 100
+  }
+}

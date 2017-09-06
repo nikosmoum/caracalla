@@ -1,0 +1,26 @@
+{
+    "Activation key consumer CREATE": {
+        "allowed_deviance": 30,
+        "required_success": 100
+    },
+    "Activation key consumer DELETE": {
+        "allowed_deviance": 30,
+        "required_success": 100
+    },
+    "Environment CREATE": {
+        "allowed_deviance": 10,
+        "required_success": 100
+    },
+    "Environment DELETE": {
+        "allowed_deviance": 10,
+        "required_success": 100
+    },
+    "Environment consumer CREATE": {
+        "allowed_deviance": 30,
+        "required_success": 100
+    },
+    "Environment consumer DELETE": {
+        "allowed_deviance": 30,
+        "required_success": 100
+    }
+}

@@ -20,11 +20,21 @@
     validate_certs: no
     timeout: 360
 
-- name: Write test properties to properties file
+- name: Write test properties to candlepin-throughput properties file
   lineinfile:
     line: "{{item}}"
-    dest: "{{candlepin_user_home}}/candlepin-throughput/candlepin-throughput.prop"
+    dest: "{{jmeter_test_details['candlepin-throughput'].property_file}}"
   with_items: "{{candlepin_throughput_properties}}"
+  tags:
+    - jmeter-step
+
+- name: Write test properties to loop over apis properties file
+  lineinfile:
+    line: "{{item}}"
+    dest: "{{jmeter_test_details['loop-over-apis'].property_file}}"
+  with_items: "{{loop_over_apis_properties}}"
+  tags:
+    - jmeter-step
 
 - name: Remove results file if present
   file:
