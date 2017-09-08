@@ -80,7 +80,7 @@ def parse_options():
     if len(args) != 1:
         parser.error("You must provide only one results file to parse/compare")
 
-    if options.parse is None and options.compare is None and options.pretty_print is None:
+    if not options.parse and not options.compare and not options.pretty_print:
         parser.error("You have to choose one of the commands: -p, --pretty-print or -c")
 
     if options.compare is True:
