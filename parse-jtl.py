@@ -87,10 +87,6 @@ def parse_options():
         if not options.baseline or not options.expected:
             parser.error("When option -c is used, then both -b and -e options have to be used too.")
 
-    if options.compare is True:
-        if not options.baseline and options.expected:
-            parser.error("Options: -b and -e have to be provided with -c")
-
     if options.no_colors is True:
         Colors.NO_COLOR = True
 
