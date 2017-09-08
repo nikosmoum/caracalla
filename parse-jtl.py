@@ -83,9 +83,9 @@ def parse_options():
     if options.parse is None and options.compare is None and options.pretty_print is None:
         parser.error("You have to choose one of the commands: -p, --pretty-print or -c")
 
-    if options.compare is True:
-        if not options.baseline and options.expected:
-            parser.error("Options: -b and -e have to be provided with -c")
+    if options.compare:
+        if not options.baseline or not options.expected:
+            parser.error("When option -c is used, then both -b and -e options have to be used too.")
 
     if options.no_colors is True:
         Colors.NO_COLOR = True
@@ -186,6 +186,8 @@ def main():
     input_file = args[0]
     logger.debug("Opening %s" % input_file)
     current_results = parse_csv(input_file)
+    baseline_data = None
+    expected_success_rate = None
 
     # Load file with baseline results
     if options.baseline:
