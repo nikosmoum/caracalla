@@ -1,0 +1,40 @@
+# Agenda
+ - Caracalla today
+   - what is a test's structure?
+   - infrastructure
+   - how to run tests
+     - jenkins job
+     - command line
+   - what does test failure mean? ( parse-jtl )
+ - Caracalla tomorrow
+   - How to add a test suite
+   - loop over api tests
+     - need for these tests 
+     - current state
+       - import_test_data.rb and test_data.json for loop-over-api tests 
+     - demo prep ( csv-config )
+     - demo
+ - Future work
+   - Complete loop-over-apis
+   - Few more jenkins jobs
+     - to update snapshots every week
+     - a job to test caracalla itself
+     - ansibilize test setup creation
+     - report results to google doc
+ - Items for discussion
+   -  What have you done for me lately, caracalla ?
+      - troubleshoot vs. ci/cd.
+      - feedback loop of failure - mysql isolation level case study
+      - perf test nanny proposal
+         - for every caracalla failure, sign off on test results if they fail.
+         - if there are too many failures on branches **including master** , disable the jenkins job and investigate.
+         - frequently ( once a week ) run the ansible script for vm maintenance.
+         - other work items that keep propping up
+         - Rest of the sprint work on loop-over-apis
+         - the cost of rotation role - can we get an intern?
+   -  What kind of infrastrucure do we need?
+      - test setup for caracalla development
+      - more infrastrucure for parallel tests.
+   -  Are the vms working for us?
+      - do we need to dockerize?
+      - investigation needed - can we run multiplie tests on the same server if we dockerize?
