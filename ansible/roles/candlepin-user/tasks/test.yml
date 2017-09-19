@@ -55,7 +55,7 @@
     - skip_ansible_lint
 
 - name: Parse result
-  command: "./parse-jtl.py --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}}"
+  command: "./parse-jtl.py --no-colors --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}}"
   args:
     chdir: "{{caracalla_checkout}}"
     creates: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
