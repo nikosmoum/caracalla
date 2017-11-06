@@ -1,0 +1,94 @@
+# Note: this script updates only baseline files for candlepin-throughput
+# performance tests.
+
+- name: Checkout Caracalla
+  git:
+    repo: "{{caracalla_git_repo}}"
+    dest: "{{caracalla_checkout}}"
+    force: yes
+    version: "{{caracalla_branch}}"
+
+# We don't use {{caracalla_checkout}}, because we want to use master
+# branch as base branch. {{caracalla_checkout}} can use different branch
+# e.g. developer adds new functionality in feature branch like you
+# right now [jiri] :-P
+- name: Do force checkout of caracalla (PR)
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ git_dir }}"
+    force: yes
+    version: master
+
+- set_fact:
+    current_date: "{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}"
+
+- name: Create new git branch and do checkout of this branch
+  shell: 'git branch -m bot/{{current_date}}'
+  args:
+    chdir: "{{git_dir}}"
+
+- name: Delete old tmp directory for estimation new baseline
+  shell: 'rm -rf /tmp/estimator'
+
+- name: Create new empty directory for estimator
+  shell: 'mkdir /tmp/estimator/'
+
+# TODO: do not do following steps only for 2.3 branch
+
+- name: Copy 10 latest version of result to tmp directory
+  shell: 'for file in `ls -1tr | tail -n 10`; do cp $file /tmp/estimator; done'
+  args:
+    chdir: "{{perf_results_dir}}/candlepin-throughput/2.3"
+
+- name: Generate new version of baseline.json file
+  command: "./param_estimator.py -d /tmp/estimator -o {{git_dir}}/candlepin-throughput/baseline/2.3-baseline.json -t baseline"
+  args:
+    chdir: "{{caracalla_checkout}}"
+
+- name: Generate new version of expected.json file
+  command: "./param_estimator.py -d /tmp/estimator -o {{git_dir}}/candlepin-throughput/expected/2.3-expected.json -t deviances"
+  args:
+    chdir: "{{caracalla_checkout}}"
+
+- name: Add new version of baseline.json file to commit
+  shell: 'git add candlepin-throughput/baseline/2.3-baseline.json'
+  args:
+    chdir: "{{git_dir}}"
+
+- name: Add new version of expected.json file to commit
+  shell: 'git add candlepin-throughput/expected/2.3-expected.json'
+  args:
+    chdir: "{{git_dir}}"
+
+# TODO: check if is there anything to commit (results are different).
+
+- name: Commit changes
+  shell: 'git commit -m "New version of files from {{current_date}}"'
+  args:
+    chdir: "{{git_dir}}"
+
+- name: Push changes to feature branch
+  shell: 'git push origin bot/{{current_date}}'
+  args:
+    chdir: "{{git_dir}}"
+
+- name: Write json file with PR info
+  shell: |
+    echo '{
+    "title": "Updated conf files: {{current_date}}",
+    "body": "Changed baseline.json and expected.json files",
+    "base": "master",
+    "head": "bot/{{current_date}}"
+    }' > /tmp/caracall_pr_body.json
+
+- name: Create pull request
+  shell: |
+    curl -i -H "Authorization: token {{token}}" \
+    -d @/tmp/caracall_pr_body.json \
+    "https://api.github.com/repos/candlepin/caracalla/pulls"
+  register: pr_output
+  args:
+    chdir: "{{git_dir}}"
+
+- debug:
+    msg: "{{pr_output.stdout_lines}}"

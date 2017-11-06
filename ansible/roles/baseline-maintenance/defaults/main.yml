@@ -1,0 +1,10 @@
+token: "{{ lookup('env', 'TOKEN') }}"
+
+git_repo: git@github.com:candlepin/caracalla.git
+git_dir: /tmp/github_caracalla
+
+caracalla_git_repo: https://github.com/candlepin/caracalla.git
+caracalla_checkout: /home/jenkins/caracalla
+caracalla_branch: master
+
+perf_results_dir: /home/jenkins/perf_test_results
