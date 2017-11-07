@@ -22,11 +22,13 @@ Command line for parsing results of candlepin ferformance tests.
 
 from __future__ import print_function
 
-import logging
 import csv
 import json
-
+import logging
 from argparse import ArgumentParser
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger('parse-jtl')
@@ -54,6 +56,10 @@ def parse_options():
                         action="store_true",
                         dest="pretty_print",
                         help="Parse and pretty print")
+    parser.add_argument("--generate-histograms",
+                        metavar="histograms.pdf",
+                        dest="generate_histograms",
+                        help="Name of PDF file to store charts of the results.")
     parser.add_argument("-p", "--parse",
                         action="store_true",
                         dest="parse",
@@ -101,7 +107,7 @@ def compare_success_rates(api_call, current_success_rate, required_success_rate)
     """
     if current_success_rate < required_success_rate:
         return "API call: %s [FAILED] success rate: %s%%, expected: %4.1f%%\n" \
-            % (api_call.ljust(50, '.'), current_success_rate, required_success_rate)
+               % (api_call.ljust(50, '.'), current_success_rate, required_success_rate)
     return ""
 
 
@@ -115,9 +121,9 @@ def compare_elapsed_times(api_call, current_elapsed_time, baseline_elapsed_time,
     deviance = ((current_elapsed_time - baseline_elapsed_time) * 100) / baseline_elapsed_time
     if deviance > allowed_deviance:
         return "API call: %s [FAILED] current avg: %sms, base line avg: %sms, " \
-            "dev: %s%%, allowed dev: %4.1f%%\n" \
-            % (api_call.ljust(50, '.'), current_elapsed_time,
-               baseline_elapsed_time, deviance, allowed_deviance)
+               "dev: %s%%, allowed dev: %4.1f%%\n" \
+               % (api_call.ljust(50, '.'), current_elapsed_time,
+                  baseline_elapsed_time, deviance, allowed_deviance)
     return ""
 
 
@@ -138,11 +144,11 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
             failures += 1
         # Check elapsed time
         elap_time = compare_elapsed_times(
-                        key,
-                        values['average'],
-                        baseline_dict[key]['average'],
-                        deviance_dict[key]['allowed_deviance']
-                    )
+            key,
+            values['average'],
+            baseline_dict[key]['average'],
+            deviance_dict[key]['allowed_deviance']
+        )
         if elap_time != "":
             if Colors.NO_COLOR is False:
                 elap_time = Colors.RED + elap_time + Colors.ENDC
@@ -158,6 +164,54 @@ def compare_csv(input_dict, baseline_dict, deviance_dict):
     return result, failures
 
 
+def generate_histograms(filename, result_set):
+    rows = len(result_set.keys())
+    figure_num = 1
+    bin_size = 15  # Normalize to 15 buckets for each histogram
+
+    # figure height = 5 per row so that it is large enough
+    plt.figure(1, figsize=(20, 5 * rows))
+    for key, result in sorted(result_set.items()):
+        data_array = np.asarray(result['data'], dtype=np.integer)
+
+        # Plot the raw data
+        plt.subplot(rows, 2, figure_num)
+        plt.xlabel("Miliseconds")
+        plt.ylabel("Sample Count")
+        plt.hist(data_array, bins=bin_size)
+        plt.title(key + " (sample size: {samples})\n avg = {avg}, median = {median}, "
+                        "std_dev={std_dev}".format(
+                            samples=len(data_array),
+                            avg=int(np.average(data_array)),
+                            median=int(np.median(data_array)),
+                            std_dev=int(np.std(data_array))
+                        ))
+        plt.grid(True)
+        figure_num += 1
+
+        # Remove outliers (over over 95 percentile) and plot that as well
+        percentile = int(np.percentile(data_array, 95))
+        data_array_minimized = data_array[data_array < percentile]
+
+        plt.subplot(rows, 2, figure_num)
+        plt.xlabel("Miliseconds")
+        plt.ylabel("Sample Count")
+        plt.title(key + " up to 95 percentile (sample size: {samples})\n avg = {avg}, median = {median}, "
+                        "std_dev={std_dev}, percentile cutoff={percentile}".format(
+                            avg=int(np.average(data_array_minimized)),
+                            median=int(np.median(data_array_minimized)),
+                            std_dev=int(np.std(data_array_minimized)),
+                            percentile=percentile,
+                            samples=len(data_array_minimized)
+                        ))
+        plt.hist(data_array_minimized, bins=bin_size)
+        plt.grid(True)
+        figure_num += 1
+
+    plt.tight_layout()
+    plt.savefig(filename)
+
+
 def parse_csv(input_file):
     """
     Parse CSV with results of performance test
@@ -170,14 +224,18 @@ def parse_csv(input_file):
         next(reader, None)
         for row in reader:
             if row[2] not in results:
-                results[row[2]] = {'count': 0, 'elapsed': 0, 'success': 0}
+                results[row[2]] = {'count': 0, 'elapsed': 0, 'success': 0, 'data': []}
             results[row[2]]["count"] += 1
             results[row[2]]["elapsed"] += int(row[1])
             if row[7] == "true":
                 results[row[2]]["success"] += 1
+            results[row[2]]['data'].append(row[1])
+
     for key, result in results.items():
         results[key]["success_%"] = (result["success"] * 100) / result["count"]
         results[key]["average"] = (result["elapsed"]) / result["count"]
+        results[key]["num_calls"] = len(result['data'])
+
     return results
 
 
@@ -199,6 +257,9 @@ def main():
         with open(options.expected, 'r') as expected_success_rate_file:
             expected_success_rate = json.load(expected_success_rate_file)
 
+    if options.generate_histograms:
+        generate_histograms(filename=options.generate_histograms, result_set=current_results)
+
     if options.parse:
         output_txt = json.dumps(current_results, sort_keys=True, indent=2)
     elif options.pretty_print:
@@ -212,7 +273,7 @@ def main():
                     base_result = baseline_data[key]
                 except KeyError:
                     base_result = {"success_%": "??", "average": "??"}
-                output_txt += "{0}% ({1}%), {2}ms ({3}ms), {4} \n".format(
+                output_txt += "{0}% ({1}%), {2}ms ({3}ms), {4}\n".format(
                     result["success_%"],
                     base_result["success_%"],
                     result["average"],
