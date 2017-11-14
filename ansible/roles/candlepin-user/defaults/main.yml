@@ -9,7 +9,7 @@ candlepin_user_home:  /home/jenkins
 
 candlepin_git_repo: https://github.com/candlepin/candlepin.git
 candlepin_checkout: /home/jenkins/candlepin
-candlepin_branch: master
+candlepin_branch: candlepin-2.1-HOTFIX
 
 # feel free to change arguments but keep in mind
 # the test is meant to work with mysql, so requires -m

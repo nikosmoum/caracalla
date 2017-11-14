@@ -29,6 +29,6 @@
     failed_when:
       - "result | failed and 'domain is not running' not in result.msg"
   - name: delete existing snapshots
-    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap'"
+    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='testsnap_2.1'"
   - name: create new snapshots
-    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='readyfortestsnap'"
+    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='testsnap_2.1'"
