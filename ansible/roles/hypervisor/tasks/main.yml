@@ -9,17 +9,17 @@
     connect_timeout=600
     state=stopped
 
-- name: Reset snapshot on performance vm (readyfortestsnap snapshot)
-  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap' --running
-  when:
-    - perf_vm_domain == "CP" or (perf_vm_domain == "candlepin-perf-mysql" and target_branch == "master")
+- name: Reset snapshot on performance vm
+  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}' --running
   tags:
     - skip_ansible_lint
 
-- name: Reset snapshot on performance vm (candlepin-2.0-HOTFIX snapshot)
-  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='candlepin_20_hotfix' --running
-  when:
-    - perf_vm_domain == "candlepin-perf-mysql"
-    - target_branch == "candlepin-2.0-HOTFIX"
-  tags:
-    - skip_ansible_lint
+- name: Wait for vms to restart
+  delegate_to: localhost
+  wait_for:
+    port=22
+    host={{perf_vm_hostname}}
+    search_regex=OpenSSH
+    delay=10
+    timeout=600
+    state=started

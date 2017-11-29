@@ -1,10 +1,20 @@
 ---
+- name: Checkout branches from GitHub
+  hosts: performance-candlepin-vm
+  roles:
+    - candlepin-checkout
+  vars:
+    ansible_user: jenkins
+  tags:
+    - checkout
+
 - name: Shutdown all vms on hypervisors and reset performance vms
   hosts: performance-hypervisors
   roles:
     - hypervisor
   vars:
     ansible_user: root
+    baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
   tasks:
     - name: sleep for ddns to kick in
       pause:
@@ -29,5 +39,6 @@
     - { role: candlepin-user, deploy_candlepin: true, provision_db: true, run_test: true }
   vars:
     ansible_user: jenkins
+    baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
   tags:
     - runtest

@@ -10,6 +10,7 @@ candlepin_user_home:  /home/jenkins
 candlepin_git_repo: https://github.com/candlepin/candlepin.git
 candlepin_checkout: /home/jenkins/candlepin
 candlepin_branch: master
+baseline_branch: master
 
 # feel free to change arguments but keep in mind
 # the test is meant to work with mysql, so requires -m
@@ -30,8 +31,8 @@ jmeter_test_details:
   loop-over-apis:
     folder: Candlepin-API
     test_name: CandlepinAPI.jmx
-    baseline: baseline.json
-    expected: expected.json
+    baseline: "{{baseline_branch | baseline_file()}}"
+    expected: "{{baseline_branch | expected_file()}}"
     property_file: /home/jenkins/Candlepin-API/CandlepinAPI.prop
     result_file: results-CandlepinAPI.jtl
     comparision_result: compare.txt
@@ -40,16 +41,16 @@ jmeter_test_details:
     test_name: ImportExportManifest.jmx
     property_file: /home/jenkins/ImportExportManifest.prop
     result_file: results-importexport.jtl
-    baseline: baseline.json
-    expected: expected.json
+    baseline: "{{baseline_branch | baseline_file()}}"
+    expected: "{{baseline_branch | expected_file()}}"
     comparision_result: compare.txt
   candlepin-throughput:
     folder: candlepin-throughput
     test_name: candlepin-throughput.jmx
     property_file: /home/jenkins/candlepin-throughput/candlepin-throughput.prop
     result_file: results-throughput.jtl
-    baseline: baseline.json
-    expected: expected.json
+    baseline: "{{baseline_branch | baseline_file()}}"
+    expected: "{{baseline_branch | expected_file()}}"
     comparision_result: compare.txt
 
 candlepin_throughput_properties:
