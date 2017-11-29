@@ -27,6 +27,9 @@ import json
 import logging
 from argparse import ArgumentParser
 
+# Import matplotlib & force the use of the Agg backend to support systems without displays
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 
