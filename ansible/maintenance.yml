@@ -1,25 +1,54 @@
 ---
+# Check out the branch first as that tells us what snapshot version is being updated
+# This is necessary to set baseline_branch
+- name: Checkout branches from GitHub
+  hosts: performance-candlepin-vm
+  roles:
+    - candlepin-checkout
+  vars:
+    ansible_user: jenkins
+  tags:
+    - checkout
+
 - name: Shutdown all vms on hypervisors and reset performance vms
   hosts: performance-hypervisors
   roles:
     - hypervisor
   vars:
     ansible_user: root
+    baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
   tasks:
-    - name: sleep
+    - name: sleep for ddns to kick in
       pause:
-        minutes: 4
+        minutes: 2
+  tags:
+    - setupvms
 
-- name: run liquibase steps
+- name: Setup mysql vm
+  hosts: performance-mysql-vm
+  roles:
+    - mysql-user
+  vars:
+    ansible_user: root
+  tags:
+    - runtest
+
+# Deploy Candlepin & update the database but do not run the tests
+- name: Deploy candlepin and run performance test
   hosts: performance-candlepin-vm
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0/
   roles:
-    - { role: candlepin-user, provision_db: true }
+    - { role: candlepin-user, deploy_candlepin: true, provision_db: true, run_test: false }
   vars:
     ansible_user: jenkins
+    baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
 
-- hosts: performance-hypervisors
+# Update the snapshot of the database
+- hosts: performance-database-hypervisor
+  vars:
+    ansible_user: root
+    baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
   tasks:
   - name: shutdown performance vms
     virt:
@@ -28,7 +57,12 @@
     register: result
     failed_when:
       - "result | failed and 'domain is not running' not in result.msg"
+  - name: sleep to give the snapshots time to shut down
+    pause:
+      minutes: 1
+  - debug:
+    msg: "Working on branch: {{perf_vm_domain | snap_name(baseline_branch, target_branch)}}"
   - name: delete existing snapshots
-    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='readyfortestsnap'"
+    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}'"
   - name: create new snapshots
-    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='readyfortestsnap'"
+    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}'"
