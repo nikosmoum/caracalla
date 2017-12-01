@@ -55,7 +55,7 @@
     - skip_ansible_lint
 
 - name: Parse result
-  command: "./parse-jtl.py --no-colors --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}}"
+  command: "./parse-jtl.py --no-colors --pretty-print {{item.value.result_file}} -o parsed-{{item.value.result_file}} --generate-histograms {{item.value.result_file}}.graphs.pdf"
   args:
     chdir: "{{caracalla_checkout}}"
     creates: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
@@ -84,6 +84,16 @@
   fetch:
     src: "{{caracalla_checkout}}/parsed-{{item.value.result_file}}"
     dest: "artifacts/parsed-{{item.value.result_file}}"
+    flat: yes
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  tags:
+    - jmeter-step
+
+- name: Fetch parsed results graphs
+  fetch:
+    src: "{{caracalla_checkout}}/{{item.value.result_file}}.graphs.pdf"
+    dest: "artifacts/{{item.value.result_file}}.graphs.pdf"
     flat: yes
   with_dict: "{{jmeter_test_details}}"
   when: "item.key in jmeter_tests"
