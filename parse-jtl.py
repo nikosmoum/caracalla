@@ -196,6 +196,11 @@ def generate_histograms(filename, result_set):
         percentile = int(np.percentile(data_array, 95))
         data_array_minimized = data_array[data_array < percentile]
 
+        # Skip plot if there is no data
+        if len(data_array_minimized) == 0:
+            figure_num += 1
+            continue
+
         plt.subplot(rows, 2, figure_num)
         plt.xlabel("Miliseconds")
         plt.ylabel("Sample Count")
