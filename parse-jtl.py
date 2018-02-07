@@ -25,13 +25,19 @@ from __future__ import print_function
 import csv
 import json
 import logging
-from argparse import ArgumentParser
+from argparse import ArgumentParser, SUPPRESS
 
 # Import matplotlib & force the use of the Agg backend to support systems without displays
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import numpy as np
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import numpy as np
+except ImportError:
+    print("Failed to import matplotlib & numpy")
+    matplotlib = None
+    plt = None
+    np = None
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
 logger = logging.getLogger('parse-jtl')
@@ -59,10 +65,18 @@ def parse_options():
                         action="store_true",
                         dest="pretty_print",
                         help="Parse and pretty print")
-    parser.add_argument("--generate-histograms",
-                        metavar="histograms.pdf",
-                        dest="generate_histograms",
-                        help="Name of PDF file to store charts of the results.")
+    if np and plt:
+        parser.add_argument("--generate-histograms",
+                            metavar="histograms.pdf",
+                            dest="generate_histograms",
+                            help="Name of PDF file to store charts of the results.")
+    else:
+        # Do not show help for generating of histograms, when
+        # numpy and matplotlib are not installed
+        parser.add_argument('--generate-histograms',
+                            metavar="histograms.pdf",
+                            dest="generate_histograms",
+                            help=SUPPRESS)
     parser.add_argument("-p", "--parse",
                         action="store_true",
                         dest="parse",
@@ -265,7 +279,7 @@ def main():
         with open(options.expected, 'r') as expected_success_rate_file:
             expected_success_rate = json.load(expected_success_rate_file)
 
-    if options.generate_histograms:
+    if options.generate_histograms and np and plt:
         generate_histograms(filename=options.generate_histograms, result_set=current_results)
 
     if options.parse:
