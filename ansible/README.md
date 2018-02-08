@@ -6,9 +6,10 @@ The script assumes the following set up is available:
    * A user "jenkins" that can sudo without a password required
    * Candlepin installed with tomcat and mysql service enabled. ( local mysql is required initially for deploy )
    * Apache jmeter installed in /opt
- * A hypervisor with a vm snapshotted with the name "readyfortestsnap" for running mysql with:
+ * A hypervisor with a vm snapshotted with the name "test_snap_X.Y" for running mysql with:
    * Mysql service installed and enabled
    * Candlepin database imported, and should be remotely accessible from the above vm using username candlepin and no password
+   * X.Y is the major.minor version number of the branch snapshot to be used for testing.
 
 Note:
  * **Running this test will shutdown all vms on the hypervisors used in the setup**
