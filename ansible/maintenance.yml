@@ -1,4 +1,3 @@
----
 # Check out the branch first as that tells us what snapshot version is being updated
 # This is necessary to set baseline_branch
 - name: Checkout branches from GitHub
@@ -20,7 +19,7 @@
   tasks:
     - name: sleep for ddns to kick in
       pause:
-        minutes: 2
+        minutes: 4
   tags:
     - setupvms
 
@@ -34,7 +33,7 @@
     - runtest
 
 # Deploy Candlepin & update the database but do not run the tests
-- name: Deploy candlepin and run performance test
+- name: Deploy candlepin and provision db
   hosts: performance-candlepin-vm
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0/
@@ -50,19 +49,30 @@
     ansible_user: root
     baseline_branch: "{{hostvars['performance-candlepin-vm']['baseline_branch']}}"
   tasks:
-  - name: shutdown performance vms
+
+  - name: shutdown mysql VM
     virt:
       name: "{{perf_vm_domain}}"
       command: shutdown
     register: result
     failed_when:
       - "result | failed and 'domain is not running' not in result.msg"
-  - name: sleep to give the snapshots time to shut down
+
+  - name: sleep to give the database VM time to shut down
     pause:
       minutes: 1
-  - debug:
-    msg: "Working on branch: {{perf_vm_domain | snap_name(baseline_branch, target_branch)}}"
-  - name: delete existing snapshots
-    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}'"
-  - name: create new snapshots
-    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}'"
+
+  - name: show debug information
+    debug:
+      msg: "Working on branch: {{perf_vm_domain | snap_name(baseline_branch)}}"
+
+  - name: delete existing snapshots of mysql VM
+    command: "virsh snapshot-delete --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch)}}'"
+
+  - name: create new snapshots of mysql VM
+    command: "virsh snapshot-create-as {{perf_vm_domain}} --name='{{perf_vm_domain | snap_name(baseline_branch)}}'"
+
+  - name: start mysql VM
+    virt:
+      name: "{{perf_vm_domain}}"
+      command: start
