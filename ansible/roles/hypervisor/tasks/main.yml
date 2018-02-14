@@ -10,7 +10,7 @@
     state=stopped
 
 - name: Reset snapshot on performance vm
-  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch, target_branch)}}' --running
+  command: virsh snapshot-revert --domain {{perf_vm_domain}} --snapshotname='{{perf_vm_domain | snap_name(baseline_branch)}}' --running
   tags:
     - skip_ansible_lint
 
