@@ -1,0 +1,82 @@
+{
+    "DELETE consumers/{uuid} (post-bind)": {
+        "allowed_deviance": 83.11, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}": {
+        "allowed_deviance": 223.18, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/certificates/serials": {
+        "allowed_deviance": 223.14, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/certificates?{params}": {
+        "allowed_deviance": 323.95, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/compliance": {
+        "allowed_deviance": 200.65, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/content_overrides": {
+        "allowed_deviance": 317.9, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/entitlements?{params}": {
+        "allowed_deviance": 210.48, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/owner": {
+        "allowed_deviance": 262.82, 
+        "required_success": 95.0
+    }, 
+    "GET consumers/{uuid}/release": {
+        "allowed_deviance": 255.0, 
+        "required_success": 95.0
+    }, 
+    "GET owners/{ownerkey}/consumers": {
+        "allowed_deviance": 166.65, 
+        "required_success": 95.0
+    }, 
+    "GET owners/{ownerkey}/consumers?{params}": {
+        "allowed_deviance": 28.81, 
+        "required_success": 95.0
+    }, 
+    "GET owners/{ownerkey}/info": {
+        "allowed_deviance": 465.57, 
+        "required_success": 95.0
+    }, 
+    "GET status": {
+        "allowed_deviance": 23.52, 
+        "required_success": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements": {
+        "allowed_deviance": 105.47, 
+        "required_success": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements (CDK)": {
+        "allowed_deviance": 151.36, 
+        "required_success": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements?{params}": {
+        "allowed_deviance": 69.01, 
+        "required_success": 95.0
+    }, 
+    "POST consumers?owner={ownerkey} (pre-bind)": {
+        "allowed_deviance": 409.73, 
+        "required_success": 95.0
+    }, 
+    "POST hypervisors?owner={ownerkey}": {
+        "allowed_deviance": 619.69, 
+        "required_success": 94.91
+    }, 
+    "PUT consumers/{uuid}": {
+        "allowed_deviance": 108.65, 
+        "required_success": 95.0
+    }, 
+    "PUT owners/{ownerkey}/subscriptions": {
+        "allowed_deviance": 174.61, 
+        "required_success": 95.0
+    }
+}

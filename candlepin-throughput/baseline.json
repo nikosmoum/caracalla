@@ -1,0 +1,82 @@
+{
+    "DELETE consumers/{uuid} (post-bind)": {
+        "average": 300.67, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}": {
+        "average": 215.0, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/certificates/serials": {
+        "average": 256.33, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/certificates?{params}": {
+        "average": 218.67, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/compliance": {
+        "average": 209.0, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/content_overrides": {
+        "average": 133.0, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/entitlements?{params}": {
+        "average": 432.67, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/owner": {
+        "average": 180.33, 
+        "success_%": 95.0
+    }, 
+    "GET consumers/{uuid}/release": {
+        "average": 187.0, 
+        "success_%": 95.0
+    }, 
+    "GET owners/{ownerkey}/consumers": {
+        "average": 544.0, 
+        "success_%": 95.0
+    }, 
+    "GET owners/{ownerkey}/consumers?{params}": {
+        "average": 377.67, 
+        "success_%": 95.0
+    }, 
+    "GET owners/{ownerkey}/info": {
+        "average": 1260.67, 
+        "success_%": 95.0
+    }, 
+    "GET status": {
+        "average": 15.67, 
+        "success_%": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements": {
+        "average": 991.33, 
+        "success_%": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements (CDK)": {
+        "average": 1448.67, 
+        "success_%": 95.0
+    }, 
+    "POST consumers/{uuid}/entitlements?{params}": {
+        "average": 1012.0, 
+        "success_%": 95.0
+    }, 
+    "POST consumers?owner={ownerkey} (pre-bind)": {
+        "average": 2675.0, 
+        "success_%": 95.0
+    }, 
+    "POST hypervisors?owner={ownerkey}": {
+        "average": 10125.0, 
+        "success_%": 94.91
+    }, 
+    "PUT consumers/{uuid}": {
+        "average": 302.33, 
+        "success_%": 95.0
+    }, 
+    "PUT owners/{ownerkey}/subscriptions": {
+        "average": 280.0, 
+        "success_%": 95.0
+    }
+}
