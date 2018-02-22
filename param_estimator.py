@@ -71,6 +71,8 @@ class Estimator(object):
         path = self.options.directory
         if path is None:
             path = os.getcwd() + os.path.sep
+        elif path[-1] != os.path.sep:
+            path += os.path.sep
         file_list = [path + f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
         for filename in file_list:
             self._add_perf_test_result(filename)

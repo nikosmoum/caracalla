@@ -186,3 +186,22 @@
     chdir: "{{caracalla_checkout}}"
   tags:
     - jmeter-step
+
+- set_fact:
+    current_date: "{{ ansible_date_time.date }}_{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}"
+
+- set_fact:
+    major_minor: "{{baseline_branch | major_minor()}}"
+
+- name: Debug baseline_branch and major_minor
+  debug:
+    msg: "{{baseline_branch}} {{major_minor}}"
+
+- name: Save successful result in JSON format to shared NFS directory
+  shell: './parse-jtl.py  -p {{item.value.result_file}} -o {{perf_results_dir}}/{{item.key}}/{{major_minor}}/{{current_date}}.json'
+  with_dict: "{{jmeter_test_details}}"
+  when: "item.key in jmeter_tests"
+  args:
+    chdir: "{{caracalla_checkout}}"
+  tags:
+    - jmeter-step

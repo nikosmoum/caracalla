@@ -1,0 +1,7 @@
+---
+- name: Regular maintenance of baseline files
+  hosts: performance-candlepin-hypervisor
+  roles:
+    - { role: baseline-maintenance }
+  vars:
+    ansible_user: jenkins

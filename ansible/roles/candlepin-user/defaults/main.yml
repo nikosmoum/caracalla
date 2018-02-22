@@ -20,6 +20,8 @@ caracalla_git_repo: https://github.com/candlepin/caracalla.git
 caracalla_checkout: /home/jenkins/caracalla
 caracalla_branch: master
 
+perf_results_dir: /home/jenkins/perf_test_results
+
 # The test to run, other tests defined in jmeter_test_details
 # will be skipped
 jmeter_tests:
