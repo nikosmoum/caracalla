@@ -16,7 +16,7 @@
       "selection": "p.owner_id = o.id and  p.product_uuid = prod.uuid and prod.product_id = 'ES0113909' and prod.entity_version is null",
       "owner_id_column": "o.id",
       "group": "ownerkey",
-      "limit": "40"
+      "limit": "100"
     },
     {
       "name": "candlepin-throughput/input_data_files/post_consumers_uuid_entitlements.csv",
@@ -24,7 +24,7 @@
       "from": "cp_pool p, cp_owner o, cp2_products prod",
       "selection": "p.owner_id = o.id and  p.product_uuid = prod.uuid and prod.product_id = 'ES0113909' and prod.entity_version is null and p.quantity < 0",
       "owner_id_column": "o.id",
-      "limit": "600"
+      "limit": "650"
     },
     {
       "name": "candlepin-throughput/input_data_files/consumers_uuid.csv",
