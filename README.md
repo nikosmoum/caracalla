@@ -65,3 +65,16 @@ Currently caracalla houses utilities to performance test candlepin/server.
      * Consumers are created only once , if you wish to create consumers again , then please change the value of the User Defined Variable "ForceCreateConsumerFile"  to true 
      * run the jmeter test and observe the results.
 
+### Manual Test notes:
+All tests in the "manual" subdirectory are designed for use against a manually deployed candlepin in the candlepin vagrant environment. 
+These tests do not require the performance VM environment to run. 
+
+ * manual/auto_bind_one_consumer_with_1k_custom_subscriptions_available.jmx
+ 
+   This is a script to create, auto-attach, and then delete of a single consumer in an owner that has 1,000 custom subscriptions.
+     Environment set up by the script:
+     * Owner named foo
+     * Engineering product (71) with a single content set (fooServer)
+     * Marketing product "FooProduct"
+     * 1k subscriptions of FooProduct that provide the engineering product 71
+   * Each pool will have a source subscription but will not have stacking
