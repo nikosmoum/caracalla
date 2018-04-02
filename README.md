@@ -78,3 +78,29 @@ These tests do not require the performance VM environment to run.
      * Marketing product "FooProduct"
      * 1k subscriptions of FooProduct that provide the engineering product 71
    * Each pool will have a source subscription but will not have stacking
+
+ * manual/pool_refresh.jms
+
+    This can be used to profile account refresh.
+      Environment set up by the script
+      * Single owner with 100 pools.
+      * Each pool contains a marketing product that references a single engineering product
+      * The engineering product references a single content set
+
+     Scenarios that are set up for testing with this script
+     * Add a 2nd engineering product & content set to the existing pools.
+     * Add a 2nd content set to the existing engineering product.
+     * Add 100 net new pools
+
+     To use any of these scenarios:
+     1. Deploy a clean Candlepin instance with a new database in hosted mode. A clean database *must*
+        be deployed before starting each scenario as otherwise a version of the products will already
+        exist in the Candlepin database and muddy the results.
+     1. Disable all steps but the "setUp" thread group.
+     1. Run the setUp thread and wait for the the initial refresh pools job to finish. You will have to watch the logs for this.
+     1. Disable the "setUp" thread group and enable the group for the scenario you want to test.
+     1. Run the scenario setup thread group. This will load the data into the test adapter so the next refresh will load it into candlepin.
+     1. Disable the scenario setup group & enable the "Refresh Pools" thread group.
+     1. Connect the profiler to tomcat.
+     1. Run the "Refresh Pools" thread group.
+     1. Wait for the job to finish (again, watch the logs for completion) and then save & stop the profiler.
