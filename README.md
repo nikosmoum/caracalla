@@ -79,10 +79,10 @@ These tests do not require the performance VM environment to run.
      * 1k subscriptions of FooProduct that provide the engineering product 71
    * Each pool will have a source subscription but will not have stacking
 
- * manual/pool_refresh.jms
+ * manual/pool_refresh.jmx
 
     This can be used to profile account refresh.
-      Environment set up by the script
+      Environment set up by the script:
       * Single owner with 100 pools.
       * Each pool contains a marketing product that references a single engineering product
       * The engineering product references a single content set
@@ -104,3 +104,62 @@ These tests do not require the performance VM environment to run.
      1. Connect the profiler to tomcat.
      1. Run the "Refresh Pools" thread group.
      1. Wait for the job to finish (again, watch the logs for completion) and then save & stop the profiler.
+
+ * manual/list_consumers.jmx
+
+    Used to profile listing consumers for an owner
+      Environment set up by the script (configurable):
+      * Five owners with 20 consumers
+
+      Scenarios tested with this script:
+      * Many clients listing all consumers for an owner in parallel
+
+      To use this script:
+      1. Deploy Candlepin, optionally with a clean database
+      1. Run the script
+
+ * manual/get_consumer.jmx
+
+    Used to profile listing consumers for an owner
+      Environment set up by the script (configurable):
+      * Five owners with 20 consumers
+
+      Scenarios tested with this script:
+      * Many clients fetching consumers by UUID in parallel
+
+      To use this script:
+      1. Deploy Candlepin, optionally with a clean database
+      1. Run the script
+
+ * manual/get_consumer_certificates.jmx
+
+    Used to profile listing consumers for an owner
+      Environment set up by the script (configurable):
+      * Five owners
+      * 20 pools per owner
+      * 20 consumers per owner
+      * 10 pools consumed per consumer
+
+      Scenarios tested with this script:
+      * Many clients listing all certificates for a specific consumer in parallel
+
+      To use this script:
+      1. Deploy Candlepin, optionally with a clean database
+      1. Run the script
+
+ * manual/get_consumer_entitlements.jmx
+
+    Used to profile listing consumers for an owner
+      Environment set up by the script (configurable):
+      * Five owners
+      * 20 pools per owner
+      * 20 consumers per owner
+      * 10 pools consumed per consumer
+
+      Scenarios tested with this script:    
+      * Many clients listing all entitlements for a specific consumer in parallel
+
+      To use this script:
+      1. Deploy Candlepin, optionally with a clean database
+      1. Run the script
+
