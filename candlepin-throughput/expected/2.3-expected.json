@@ -1,82 +1,82 @@
 {
     "DELETE consumers/{uuid} (post-bind)": {
-        "allowed_deviance": 154.49,
-        "required_success": 86.35
-    },
+        "allowed_deviance": 104.7, 
+        "required_success": 95.0
+    }, 
     "GET consumers/{uuid}": {
-        "allowed_deviance": 28.59,
+        "allowed_deviance": 308.03, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/certificates/serials": {
-        "allowed_deviance": 21.37,
+        "allowed_deviance": 298.67, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/certificates?{params}": {
-        "allowed_deviance": 24.02,
-        "required_success": 94.63
-    },
+        "allowed_deviance": 475.59, 
+        "required_success": 95.0
+    }, 
     "GET consumers/{uuid}/compliance": {
-        "allowed_deviance": 31.14,
+        "allowed_deviance": 274.93, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/content_overrides": {
-        "allowed_deviance": 101.58,
+        "allowed_deviance": 434.03, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/entitlements?{params}": {
-        "allowed_deviance": 21.46,
+        "allowed_deviance": 218.57, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/owner": {
-        "allowed_deviance": 37.7,
+        "allowed_deviance": 382.55, 
         "required_success": 95.0
-    },
+    }, 
     "GET consumers/{uuid}/release": {
-        "allowed_deviance": 39.41,
+        "allowed_deviance": 360.77, 
         "required_success": 95.0
-    },
+    }, 
     "GET owners/{ownerkey}/consumers": {
-        "allowed_deviance": 12.85,
+        "allowed_deviance": 155.0, 
         "required_success": 95.0
-    },
+    }, 
     "GET owners/{ownerkey}/consumers?{params}": {
-        "allowed_deviance": 32.42,
+        "allowed_deviance": 36.89, 
         "required_success": 95.0
-    },
+    }, 
     "GET owners/{ownerkey}/info": {
-        "allowed_deviance": 48.62,
+        "allowed_deviance": 592.05, 
         "required_success": 95.0
-    },
+    }, 
     "GET status": {
-        "allowed_deviance": 105.0,
+        "allowed_deviance": 27.22, 
         "required_success": 95.0
-    },
+    }, 
     "POST consumers/{uuid}/entitlements": {
-        "allowed_deviance": 11.51,
-        "required_success": 93.26
-    },
+        "allowed_deviance": 103.17, 
+        "required_success": 95.0
+    }, 
     "POST consumers/{uuid}/entitlements (CDK)": {
-        "allowed_deviance": 22.06,
+        "allowed_deviance": 125.39, 
         "required_success": 95.0
-    },
+    }, 
     "POST consumers/{uuid}/entitlements?{params}": {
-        "allowed_deviance": 20.63,
-        "required_success": 93.8
-    },
-    "POST consumers?owner={ownerkey} (pre-bind)": {
-        "allowed_deviance": 171.45,
-        "required_success": 93.87
-    },
-    "POST hypervisors?owner={ownerkey}": {
-        "allowed_deviance": 82.95,
-        "required_success": 93.4
-    },
-    "PUT consumers/{uuid}": {
-        "allowed_deviance": 20.35,
+        "allowed_deviance": 65.18, 
         "required_success": 95.0
-    },
+    }, 
+    "POST consumers?owner={ownerkey} (pre-bind)": {
+        "allowed_deviance": 575.51, 
+        "required_success": 95.0
+    }, 
+    "POST hypervisors?owner={ownerkey}": {
+        "allowed_deviance": 866.9, 
+        "required_success": 94.84
+    }, 
+    "PUT consumers/{uuid}": {
+        "allowed_deviance": 144.04, 
+        "required_success": 95.0
+    }, 
     "PUT owners/{ownerkey}/subscriptions": {
-        "allowed_deviance": 10.11,
+        "allowed_deviance": 263.82, 
         "required_success": 95.0
     }
 }
